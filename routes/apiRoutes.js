@@ -1,5 +1,6 @@
 var db = require("../models");
 var passport = require("../config/passport");
+const axios = require("axios");
 module.exports = function(app) {
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
@@ -50,5 +51,25 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
+  });
+
+  app.get("/api/user_search", (req, res) => {
+    axios
+      .post(
+        "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAVpmuLGpbN52fYXmPxm1bgWqibre7ZXiI"
+      )
+      .then(response => {
+        console.log(response);
+        let latitude = response.data.location.lat;
+        let longitude = response.data.location.lng;
+
+        axios
+          .get(
+            `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&keyword=pasta&key=AIzaSyAVpmuLGpbN52fYXmPxm1bgWqibre7ZXiI`
+          )
+          .then(function(response) {
+            res.json(response.data);
+          });
+      });
   });
 };
