@@ -1,6 +1,10 @@
 var db = require("../models");
 var passport = require("../config/passport");
 const axios = require("axios");
+const yelp = require("yelp-fusion");
+const client = yelp.client(
+  "qW6J2Yi8cQQab7AJrwClBrgY4TLPh2COFDh6PWp2zrMEa5_IriSaNhqOMY_eFoVipx31cmwAUiUl_gmfC3ZByKsSpsZ7neZqgzmWpbAPQFDWw0R7QHZkVNA6r0EpXHYx"
+);
 module.exports = function(app) {
   app.post("/api/login", passport.authenticate("local"), function(req, res) {
     // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
@@ -53,23 +57,38 @@ module.exports = function(app) {
     }
   });
 
-  app.get("/api/user_search", (req, res) => {
-    axios
-      .post(
-        "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAVpmuLGpbN52fYXmPxm1bgWqibre7ZXiI"
-      )
-      .then(response => {
-        console.log(response);
-        let latitude = response.data.location.lat;
-        let longitude = response.data.location.lng;
+  app.post("/api/user_search", function(req, res) {
+    console.log(req.body);
 
-        axios
-          .get(
-            `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${latitude},${longitude}&radius=1500&type=restaurant&keyword=pasta&key=AIzaSyAVpmuLGpbN52fYXmPxm1bgWqibre7ZXiI`
-          )
-          .then(function(response) {
-            res.json(response.data);
-          });
+    let inputFoodContent = req.body.searchFoodBar;
+    let inputLocationContent = req.body.searchLocationBar;
+    // res.json(inputLocationContent);
+    console.log(`Outside of get request ${inputFoodContent}`);
+    console.log(`Outside of get request ${inputLocationContent}`);
+
+    client
+      .search({
+        term: inputFoodContent,
+        location: inputLocationContent,
+        sort_by: "rating",
+        limit: 5
+      })
+      .then(response => {
+        res.json(response.jsonBody.businesses);
+      })
+      .catch(e => {
+        console.log(e);
       });
+
+    // app.get("/api/user_search", (req, res) => {
+    //   axios
+    //     .post(
+    //       "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAVpmuLGpbN52fYXmPxm1bgWqibre7ZXiI"
+    //     )
+    //     .then(response => {
+    //       let latitude = response.data.location.lat;
+    //       let longitude = response.data.location.lng;
+    //     });
+    // });
   });
 };

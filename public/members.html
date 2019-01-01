@@ -34,11 +34,24 @@
         </div>
       </div>
     </div>
-    <form method="POST" id="food-search">
-      <input id="searchInput" type="text" />
-      <button id="search-btn" type="submit">Search</button>
-    </form>
+    <div class="search-container text-center">
+      <form id="food-search">
+        <label for="searchLocationInput">Pick Your City</label><br />
+        <input
+          id="searchLocationInput"
+          type="text"
+          name="searchLocationBar"
+        /><br />
+        <input
+          id="searchFoodInput"
+          type="text"
+          name="searchFoodBar"
+          placeholder="Pick Your Food"
+        /><br />
+        <button id="search-btn" type="submit">Search</button>
+      </form>
+    </div>
 
-    <div id="map" style="width: 400px; height: 300px;"></div>
+    <div class="mx-auto" id="map" style="width: 600px; height: 300px;"></div>
   </body>
 </html>
