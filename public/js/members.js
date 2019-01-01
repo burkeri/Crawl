@@ -6,9 +6,10 @@ $(document).ready(function() {
   let lng;
 
   foodSearch.addEventListener("submit", event => {
-    const searchInput = document.getElementById("searchInput").value;
+    let searchFoodInput = document.getElementById("searchFoodInput").value;
+    let searchLocationInput = document.getElementById("searchLocationInput")
+      .value;
     event.preventDefault();
-
     $.ajax({
       url:
         "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAVpmuLGpbN52fYXmPxm1bgWqibre7ZXiI",
@@ -58,28 +59,31 @@ $(document).ready(function() {
         );
       });
 
-      $.get("/api/user_search").then(data => {
-        console.log(data.results);
+      $.post("/api/user_search", $("#food-search").serialize(), function(data) {
+        console.log(data);
         let geojson;
         let locationArray = [];
-        for (let i = 0; i < data.results.length; i++) {
-          console.log(data.results[i]);
-          locationArray.push(data.results[i].geometry.location.lng);
-          locationArray.push(data.results[i].geometry.location.lat);
+        let markerNumber = 0;
+        for (let i = 0; i < data.length; i++) {
+          markerNumber++;
+          console.log(markerNumber);
+          console.log(data[i]);
+          locationArray.push(data[i].coordinates.longitude);
+          locationArray.push(data[i].coordinates.latitude);
           geojson = {
             type: "FeatureCollection",
             features: [
               {
                 type: "Feature",
                 properties: {
-                  message: data.results[i].name,
-                  iconSize: [48, 48]
+                  message: data[i].name,
+                  iconSize: [35, 35]
                 },
                 geometry: {
                   type: "Point",
                   coordinates: [
-                    data.results[i].geometry.location.lng,
-                    data.results[i].geometry.location.lat
+                    data[i].coordinates.longitude,
+                    data[i].coordinates.latitude
                   ]
                 }
               }
@@ -87,9 +91,10 @@ $(document).ready(function() {
           };
           geojson.features.forEach(function(marker) {
             // create a DOM element for the marker
+
             var el = document.createElement("div");
             el.className = "marker";
-            el.style.backgroundImage = `url(https://img.icons8.com/color/48/000000/marker.png)`;
+            el.style.backgroundImage = `url(/images/map-icons/number_${markerNumber}.png)`;
             el.style.width = marker.properties.iconSize[0] + "px";
             el.style.height = marker.properties.iconSize[1] + "px";
 
@@ -115,11 +120,11 @@ $(document).ready(function() {
               geometry: {
                 type: "LineString",
                 coordinates: [
-                  [lng, lat],
                   [locationArray[0], locationArray[1]],
                   [locationArray[2], locationArray[3]],
                   [locationArray[4], locationArray[5]],
-                  [locationArray[6], locationArray[7]]
+                  [locationArray[6], locationArray[7]],
+                  [locationArray[8], locationArray[9]]
                 ]
               }
             }
@@ -129,11 +134,17 @@ $(document).ready(function() {
             "line-cap": "round"
           },
           paint: {
-            "line-color": "#888",
+            "line-color": "#fd715b",
             "line-width": 8
           }
-        });
+        }); //data is the response from the backend
       });
+      document.getElementById("searchFoodInput").value = "";
+      document.getElementById("searchLocationInput").value = "";
+
+      // $.get("/api/user_search").then(data => {
+      //   console.log(data);
+      // });
     });
   });
 
