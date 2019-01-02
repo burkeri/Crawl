@@ -19,16 +19,6 @@
 
 <style scoped>
 
-    /* .vid-container {
-      position: absolute;
-      z-index: -100;
-      top: -50%;
-      left: -50%;
-      min-width: 200%;
-      min-height: 100%;
-      background: red;
-    } */
-
     #background-vid {
       position: fixed;
       z-index: -100;
@@ -64,11 +54,13 @@
 
     a {
       color: white;
+      font-family: "Poppins";
     }
 
     a:hover{
       color: white;
       text-decoration: none;
+      font-family: "Poppins";
     }
 
     #login{ 
