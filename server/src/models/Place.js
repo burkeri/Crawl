@@ -2,6 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Place = sequelize.define("Place", {
     pid: {
       type: DataTypes.STRING,
+      primaryKey: true,
       allowNull: false,
       unique: true
     },
@@ -36,5 +37,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     }
   });
+
+  Place.associate = function(models) {
+    Place.hasMany(models.Tag, {
+      foreignKey: "pid"
+    });
+  };
   return Place;
 };
