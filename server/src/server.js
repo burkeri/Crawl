@@ -10,12 +10,11 @@ const app = express();
 app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(serveStatic(`${__dirname}/../../dist`));
-console.log(process.env);
+// app.use(serveStatic(`${__dirname}/../../dist`));
 
 require("./routes")(app);
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(config.port);
   console.log(`Server started of port ${config.port}`);
 });
