@@ -1,18 +1,97 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    
+    <!-- Title -->
+    <h1>Taste Tour</h1>
+
+    <!-- Overlay -->
+    <div id="black"></div>
+        
+    <!-- Background Vid -->
+    <video id="background-vid" autoplay loop muted src="../assets/Untitled.webm"></video>
+        
+    <!-- Buttons -->
+    <b-button size="lg" id="login"><router-link to="login">Sign In</router-link></b-button>
+    <b-button size="lg" id="register"><router-link to="register">Sign Up</router-link></b-button>
+
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+<style scoped>
 
-export default {
-  name: "home",
-  components: {
-    HelloWorld
-  }
-};
-</script>
+    /* .vid-container {
+      position: absolute;
+      z-index: -100;
+      top: -50%;
+      left: -50%;
+      min-width: 200%;
+      min-height: 100%;
+      background: red;
+    } */
+
+    #background-vid {
+      position: fixed;
+      z-index: -100;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translateX(calc((100% - 100vw) / 2));
+    }
+
+    #black {
+      position: fixed;
+      z-index: -50;
+      right: 0;
+      bottom: 0;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translateX(calc((100% - 100vw) / 2));
+      background-color: rgb(0, 0, 0, .5);
+    }
+
+    @font-face {
+      font-family: "Blow Brush";
+      src: url("../assets/blowbrush.otf");
+    }
+
+    h1 {
+      font-family: "Blow Brush";
+      color: white;
+      font-size: 800%;
+      margin-top: 10%;
+    }
+
+    a {
+      color: white;
+    }
+
+    a:hover{
+      color: white;
+      text-decoration: none;
+    }
+
+    #login{ 
+      background-color: #fd593f;
+      border: none;
+    }
+
+    #login:hover {
+      opacity: .5;
+    }
+
+    #register{ 
+      background-color: #fd593f;
+      border: none;
+      opacity: .5;
+    }
+
+    #register:hover {
+      opacity: 1;
+    }
+
+    #login, #register {
+      margin: 10%;
+    }
+
+</style>
