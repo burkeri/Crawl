@@ -4,15 +4,13 @@ const yelp = require("yelp-fusion");
 const keys = require("../config/keys");
 const axios = require("axios");
 const geolib = require("geolib");
-const client = yelp.client(keys.keys.yelp);
+const client = yelp.client(keys.yelp);
 
 module.exports = {
   async search(req, res) {
     try {
       const userPositionResponse = await axios.post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=${
-          keys.keys.google
-        }`
+        `https://www.googleapis.com/geolocation/v1/geolocate?key=${keys.google}`
       );
 
       const userPosition = {
@@ -137,7 +135,7 @@ module.exports = {
           include: [
             {
               model: Place,
-              where: { city: location }
+              where: { city: location, price: price }
             }
           ]
         });
@@ -147,15 +145,17 @@ module.exports = {
       }
       closestLocations = [];
       closestLocationsName = [];
+      closestLocationsLatLng = [];
       let smallestDistance = Infinity;
       let currentLocation;
       let placeCounter = 0;
       let lastLocation = userPosition;
       buildArray = function() {
+        let placeLocation = {};
         for (place of finalData) {
-          const placeLocation = {
-            latitude: place.Place.latitude,
-            longitude: place.Place.longitude
+          placeLocation = {
+            latitude: place.Place.dataValues.latitude,
+            longitude: place.Place.dataValues.longitude
           };
 
           let distance = geolib.getDistance(lastLocation, placeLocation);
@@ -164,12 +164,17 @@ module.exports = {
             closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
           ) {
             currentLocation = place.Place.dataValues;
+            currentLocationLatLng = {
+              latitude: currentLocation.latitude,
+              longitude: currentLocation.longitude
+            };
             smallestDistance = distance;
           }
         }
         placeCounter++;
         closestLocations.push(currentLocation);
         closestLocationsName.push(currentLocation.pid);
+        closestLocationsLatLng.push(currentLocationLatLng);
         lastLocation = {
           latitude: currentLocation.latitude,
           longitude: currentLocation.longitude
@@ -180,7 +185,13 @@ module.exports = {
         }
       };
       await buildArray();
-      res.send(closestLocations);
+
+      const centerOfPoints = geolib.getCenter(closestLocationsLatLng);
+
+      res.send({
+        center: centerOfPoints,
+        places: closestLocations
+      });
     } catch (err) {
       console.log(err);
     }
