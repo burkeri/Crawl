@@ -26,6 +26,12 @@
         :options="options">
     </b-form-checkbox-group>
 
+    <!-- Search button -->
+    <b-button id="search">Search</b-button>
+
+    <!-- Login -->
+    <a>Log Out</a>
+
   </div>
 </template>
 
@@ -128,6 +134,33 @@ export default {
 
     #price {
         margin-top: 10%;
+    }
+
+    #search {
+        display: block;
+        background-color: #fd593f;
+        margin: 0 auto;
+        border: none;
+        margin-top: 10%;
+        margin-bottom: 5%;
+    }
+
+    #search:hover {
+        opacity: .5;
+    }
+
+    a:not([href]):not([tabindex]) {
+        color: white;
+        opacity: .5;
+        margin-top: 10%;
+        text-decoration: none;
+        font-size: 15px;
+    }
+
+     a:not([href]):not([tabindex]):focus, 
+     a:not([href]):not([tabindex]):hover {
+        opacity: 1;
+        color: white;
     }
 
 </style>
