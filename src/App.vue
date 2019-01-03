@@ -6,7 +6,9 @@
       <router-link to="login">Log In</router-link> |
       <router-link to="search">Search</router-link> |
       <router-link to="info">Info</router-link> |
-      <router-link to="route">Route</router-link> 
+      <router-link to="route">Route</router-link> |
+      <router-link to="post">Write Review</router-link> |
+      <router-link to="end">End</router-link> |
 
     </div>
     <router-view/>
