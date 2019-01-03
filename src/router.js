@@ -10,6 +10,7 @@ import Login from "./views/Login";
 // Search
 import Search from "./views/Search";
 // Route
+import Route from "./views/Route";
 // Info
 import Info from "./views/Info"
 // On Route
@@ -45,6 +46,11 @@ export default new Router({
       path: "/info",
       name: "info",
       component: Info
+    },
+    {
+      path: "/route",
+      name: "route",
+      component: Route
     }
   ]
 });

@@ -6,14 +6,15 @@
       <router-link to="login">Log In</router-link>|
       <router-link to="search">Search</router-link> |
       <router-link to="info">Info</router-link>
+      <router-link to="route">Route</router-link>
+
     </div>
     <router-view/>
   </div>
 </template>
 
 <style>
-
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url("https://fonts.googleapis.com/css?family=Poppins");
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

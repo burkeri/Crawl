@@ -11,7 +11,6 @@ app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(serveStatic(`${__dirname}/../../dist`));
-console.log(process.env);
 
 require("./routes")(app);
 
