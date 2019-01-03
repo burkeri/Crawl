@@ -9,28 +9,22 @@
     </div>
 
     <!-- Search Form -->
-    <h3>Pick Your City</h3>
+    <h3 v-bind:style="message">Pick Your City</h3>
     <b-form-input id="city" type="text" name="city" autocomplete="off" placeholder="New York"/>
     <img id="cutlery" src="../assets/cutlery.png">
     <b-form-input id="food" type="text" name="food" autocomplete="off" placeholder="Pick Your Food"/>
 
     <!-- Price Select -->
     <h3 id="price">Price</h3>
-<!-- 
-    <div id="buttons">
-      <b-button size="lg" id="ds">$</b-button>
-      <b-button size="lg" id="ds">$$</b-button>
-      <b-button size="lg" id="ds">$$$</b-button>
-    </div> -->
 
     <b-form-checkbox-group
-        v-model="selected"
+        v-bind:class="{active: isActive}"
         buttons
-        id ="ds"
+        class="btn btn-brand btn-lg"
         size="lg"
         name="ds"
-        :options="options"></b-form-checkbox-group>
-
+        :options="options">
+    </b-form-checkbox-group>
 
   </div>
 </template>
@@ -135,10 +129,5 @@ export default {
     #price {
         margin-top: 10%;
     }
-
-    #ds {
-        margin: 5%;
-        width: 75%;
-    }       
 
 </style>
