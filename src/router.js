@@ -39,6 +39,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search
+    },
+    {
+      path: "/info",
+      name: "info",
+      component: Info
     }
   ]
 });
