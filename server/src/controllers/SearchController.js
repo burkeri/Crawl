@@ -152,7 +152,6 @@ module.exports = {
       let placeCounter = 0;
       let lastLocation = userPosition;
       buildArray = function() {
-        console.log(closestLocationsName);
         for (place of finalData) {
           const placeLocation = {
             latitude: place.Place.latitude,
@@ -160,18 +159,10 @@ module.exports = {
           };
 
           let distance = geolib.getDistance(lastLocation, placeLocation);
-          console.log(
-            `${
-              place.Place.dataValues.name
-            }'s index: ${closestLocationsName.indexOf(
-              place.Place.dataValues.pid
-            )}`
-          );
           if (
             distance < smallestDistance &&
             closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
           ) {
-            console.log(`Found new close place ${place.Place.dataValues.pid}`);
             currentLocation = place.Place.dataValues;
             smallestDistance = distance;
           }
