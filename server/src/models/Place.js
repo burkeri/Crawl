@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     city: DataTypes.STRING,
     region: DataTypes.STRING,
+    price: DataTypes.INTEGER,
     rating: {
       type: DataTypes.DECIMAL(2, 1),
       allowNull: false

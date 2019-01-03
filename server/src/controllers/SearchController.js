@@ -33,7 +33,7 @@ module.exports = {
         include: [
           {
             model: Place,
-            where: { city: location }
+            where: { city: location, price: price }
           }
         ]
       });
@@ -67,6 +67,7 @@ module.exports = {
                     address: business.location.address1,
                     city: business.location.city,
                     region: business.location.state,
+                    price: price,
                     rating: business.rating,
                     numberOfRatings: business.review_count,
                     longitude: business.coordinates.longitude,
