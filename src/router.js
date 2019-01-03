@@ -11,6 +11,7 @@ import Login from "./views/Login";
 import Search from "./views/Search";
 // Route
 // Info
+import Info from "./views/Info"
 // On Route
 // Arrived
 // End
