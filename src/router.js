@@ -10,6 +10,7 @@ import Login from "./views/Login";
 // Search
 import Search from "./views/Search";
 // Route
+import Route from "./views/Route";
 // Info
 // On Route
 // Arrived
@@ -39,6 +40,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search
+    },
+    {
+      path: "/route",
+      name: "route",
+      component: Route
     }
   ]
 });
