@@ -8,6 +8,7 @@
     "start": "node server/src/server.js"
   },
   "dependencies": {
+    "@turf/turf": "^5.1.6",
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.5.3",

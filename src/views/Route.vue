@@ -1,15 +1,18 @@
 <template>
   <div id="map-wrapper">
+    <input type="text" v-model="radius">
     <div id="map"></div>
   </div>
 </template>
 
 <script>
 import mapboxgl from "mapbox-gl";
+import * as turf from "@turf/turf";
 
 export default {
   data() {
     return {
+      radius: "0.25",
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
       routeObj: {
@@ -114,12 +117,79 @@ export default {
     let map = this.map();
     let data = this.routeObj.places;
     let lineCoordinates = [];
+    let circle;
+    let stage = 0;
+    let radius = this.radius;
+
+    let nextLocationCounter = 0;
+    let nextLocation = data[nextLocationCounter];
 
     for (let place of data) {
       lineCoordinates.push([place.longitude, place.latitude]);
     }
 
-    let geoJson = {
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.watchPosition(success, error);
+      } else {
+        this.error = "Geolocation is not supported by this browser.";
+      }
+    }
+    function success(position) {
+      let crd = position.coords;
+      let crdLngLat = turf.point([crd.longitude, crd.latitude]);
+      let nextLocationLngLat = turf.point([
+        nextLocation.longitude,
+        nextLocation.latitude
+      ]);
+      // let radius = 0.25;
+      let circleOptions = {
+        units: "miles"
+      };
+
+      console.log(radius);
+      circle = turf.circle(
+        nextLocationLngLat,
+        parseFloat(radius),
+        circleOptions
+      );
+
+      if (turf.booleanPointInPolygon(crdLngLat, circle)) {
+        if (stage === 0) {
+          console.log(`You've made it!`);
+          stage = 1;
+        }
+      } else {
+        if (stage === 1) {
+          console.log(`You left`);
+          stage = 0;
+          nextLocationCounter++;
+        } else {
+          console.log("You are not there yet");
+        }
+      }
+    }
+
+    function error(error) {
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          this.error = "User denied the request for Geolocation.";
+          break;
+        case error.POSITION_UNAVAILABLE:
+          this.error = "Location information is unavailable.";
+          break;
+        case error.TIMEOUT:
+          this.error = "The request to get user location timed out.";
+          break;
+        case error.UNKNOWN_ERROR:
+          this.error = "An unknown error occurred.";
+          break;
+      }
+    }
+
+    getLocation();
+
+    let geoJsonLine = {
       id: "route",
       type: "line",
       source: {
@@ -156,7 +226,7 @@ export default {
           .addTo(map);
         markerNumber++;
       }
-      map.addLayer(geoJson);
+      map.addLayer(geoJsonLine);
     });
   }
 };
@@ -189,4 +259,8 @@ export default {
   cursor: pointer;
 }
 
+.marker:active {
+  width: 35px;
+  height: 35px;
+}
 </style>
