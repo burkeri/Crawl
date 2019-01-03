@@ -153,8 +153,11 @@ module.exports = {
       let currentLocation;
       let placeCounter = 0;
       let lastLocation = userPosition;
+      // if (finalData.length >= 5) {
+
       buildArray = function() {
         let placeLocation = {};
+
         for (place of finalData) {
           placeLocation = {
             latitude: place.Place.dataValues.latitude,
@@ -167,6 +170,7 @@ module.exports = {
             closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
           ) {
             currentLocation = place.Place.dataValues;
+
             currentLocationLatLng = {
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude
@@ -175,6 +179,7 @@ module.exports = {
           }
         }
         placeCounter++;
+
         closestLocations.push(currentLocation);
         closestLocationsName.push(currentLocation.pid);
         closestLocationsLatLng.push(currentLocationLatLng);
@@ -183,7 +188,10 @@ module.exports = {
           longitude: currentLocation.longitude
         };
         smallestDistance = Infinity;
-        if (placeCounter < 5) {
+        if (
+          placeCounter < 5 &&
+          closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
+        ) {
           buildArray();
         }
       };
@@ -195,6 +203,9 @@ module.exports = {
         center: centerOfPoints,
         places: closestLocations
       });
+      // } else {
+      //   console.log("NOT ENOUGH BIG DATA");
+      // }
     } catch (err) {
       console.log(err);
     }
