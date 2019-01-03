@@ -12,6 +12,7 @@ import Search from "./views/Search";
 // Route
 import Route from "./views/Route";
 // Info
+import Info from "./views/Info"
 // On Route
 // Arrived
 // End
@@ -40,6 +41,11 @@ export default new Router({
       path: "/search",
       name: "search",
       component: Search
+    },
+    {
+      path: "/info",
+      name: "info",
+      component: Info
     },
     {
       path: "/route",
