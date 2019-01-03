@@ -113,104 +113,56 @@ export default {
   mounted() {
     let map = this.map();
     let data = this.routeObj.places;
+    let lineCoordinates = [];
 
-    // let geoJson = {
-    //   id: "points",
-    //   type: "symbol",
-    //   source: {
-    //     type: "geojson",
-    //     data: {
-    //       type: "FeatureCollection",
-    //       features: [
-    //         {
-    //           type: "Feature",
-    //           geometry: {
-    //             type: "Point",
-    //             coordinates: [data[0].longitude, data[0].latitude]
-    //           },
-    //           properties: {
-    //             title: data[0].name,
-    //             icon: "circle"
-    //           }
-    //         },
-    //         {
-    //           type: "Feature",
-    //           geometry: {
-    //             type: "Point",
-    //             coordinates: [data[1].longitude, data[1].latitude]
-    //           },
-    //           properties: {
-    //             title: data[1].name,
-    //             icon: "circle"
-    //           }
-    //         },
-    //         {
-    //           type: "Feature",
-    //           geometry: {
-    //             type: "Point",
-    //             coordinates: [data[2].longitude, data[2].latitude]
-    //           },
-    //           properties: {
-    //             title: data[2].name,
-    //             icon: "circle"
-    //           }
-    //         },
-    //         {
-    //           type: "Feature",
-    //           geometry: {
-    //             type: "Point",
-    //             coordinates: [data[3].longitude, data[3].latitude]
-    //           },
-    //           properties: {
-    //             title: data[3].name,
-    //             icon: "circle"
-    //           }
-    //         },
-    //         {
-    //           type: "Feature",
-    //           geometry: {
-    //             type: "Point",
-    //             coordinates: [data[4].longitude, data[4].latitude]
-    //           },
-    //           properties: {
-    //             title: data[4].name,
-    //             icon: "circle"
-    //           }
-    //         }
-    //       ]
-    //     }
-    //   },
-    //   layout: {
-    //     "icon-image": "{icon}-15",
-    //     "text-field": "{title}",
-    //     "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-    //     "text-offset": [0, 0.6],
-    //     "text-anchor": "top",
-    //     "icon-allow-overlap": true,
-    //     "icon-ignore-placement": true,
-    //     "text-allow-overlap": true
-    //     // "icon-color": "#fd593f"
-    //   }
-    // };
+    for (let place of data) {
+      lineCoordinates.push([place.longitude, place.latitude]);
+    }
+
+    let geoJson = {
+      id: "route",
+      type: "line",
+      source: {
+        type: "geojson",
+        data: {
+          type: "Feature",
+          properties: {},
+          geometry: {
+            type: "LineString",
+            coordinates: lineCoordinates
+          }
+        }
+      },
+      layout: {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      paint: {
+        "line-color": "#fd593f",
+        "line-width": 4,
+        "line-dasharray": [1, 2]
+      }
+    };
+
     map.on("load", function() {
+      let markerNumber = 1;
       for (let place of data) {
         const el = document.createElement("div");
+        el.textContent = markerNumber;
         el.className = "marker";
-        el.style.backgroundColor = "#fd593f";
-        el.style.width = "25px";
-        el.style.height = "25px";
-        el.style.borderRadius = "50%";
 
         new mapboxgl.Marker(el)
           .setLngLat([place.longitude, place.latitude])
           .addTo(map);
+        markerNumber++;
       }
+      map.addLayer(geoJson);
     });
   }
 };
 </script>
 
-<style scoped>
+<style>
 #map {
   margin: 0 auto;
   width: 500px;
@@ -220,4 +172,21 @@ export default {
 #map-wrapper {
   text-align: left;
 }
+
+.marker {
+  color: white;
+  background-color: #fd593f;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  padding: 3px 0 0 8px;
+  font-size: 1rem;
+  transition: width 1s;
+  transition: height 1s;
+}
+
+.marker:hover {
+  cursor: pointer;
+}
+
 </style>
