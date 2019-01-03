@@ -1,11 +1,10 @@
 <template>
-<div>
-
+  <div>
     <!-- Place Header -->
     <div id="info-pic-div">
-        <img id="info-pic" :src="infoPic"/>
-        <h1>{{name}}</h1>
-        <div id="black"></div>
+      <img id="info-pic" :src="infoPic">
+      <h1>{{name}}</h1>
+      <div id="black"></div>
     </div>
 
     <!-- Rating -->
@@ -18,12 +17,13 @@
         </div>
         <b-button>Load more</b-button>
     </div>
-
-</div> 
+    
+  </div>
 </template>
 
 <script>
 export default {
+
     data(){
         return {
             infoPic: "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
@@ -61,50 +61,50 @@ export default {
         this.printRating();
     }
 }
+
 </script>
     
 <style scoped>
+div {
+  font-family: "Poppins";
+}
 
-    div {
-        font-family: "Poppins";
-    }
+#info-pic-div {
+  position: fixed;
+  top: 0;
+  z-index: -100;
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+}
 
-    #info-pic-div {
-        position: fixed;
-        top: 0;
-        z-index: -100;
-        width: 100%;
-        height: 40%;
-        overflow: hidden;
-    }
+#info-pic {
+  position: absolute;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  filter: blur(2px);
+}
 
-    #info-pic {
-        position: absolute;
-        z-index: -100;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        filter: blur(2px);
-    }
+#black {
+  position: absolute;
+  z-index: -100;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0, 0.35);
+}
 
-    #black {
-        position: absolute;
-        z-index: -100;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: rgb(0, 0, 0, .35);
-    }
-
-    h1 {
-        position: absolute;
-        top: 40%;
-        transform: translateX(calc((-100% - -100vw) / 2));
-        color: white;
-        font-weight: 700;
-    }
+h1 {
+  position: absolute;
+  top: 40%;
+  transform: translateX(calc((-100% - -100vw) / 2));
+  color: white;
+  font-weight: 700;
+}
 
     #rating-container {
         background-color: white;
@@ -167,6 +167,11 @@ export default {
         display: inline;
     }
 
+#reviews {
+  background-color: #fd593f;
+  color: white;
+  text-align: left;
+  padding: 5%;
+  margin: 10%;
+}
 </style>
-
-

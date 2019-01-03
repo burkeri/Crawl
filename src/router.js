@@ -12,7 +12,7 @@ import Search from "./views/Search";
 // Route
 import Route from "./views/Route";
 // Info
-import Info from "./views/Info"
+import Info from "./views/Info";
 // On Route
 // Arrived
 // End

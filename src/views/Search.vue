@@ -12,176 +12,181 @@
     <h3 v-bind:style="message">Pick Your City</h3>
     <b-form-input id="city" type="text" name="city" autocomplete="off" placeholder="New York"/>
     <img id="cutlery" src="../assets/cutlery.png">
-    <b-form-input id="food" type="text" name="food" autocomplete="off" placeholder="Pick Your Food"/>
+    <b-form-input
+      id="food"
+      type="text"
+      name="food"
+      autocomplete="off"
+      placeholder="Pick Your Food"
+    />
 
     <!-- Price Select -->
     <h3 id="price">Price</h3>
 
     <b-form-checkbox-group
-        v-bind:class="{active: isActive}"
-        buttons
-        id="brand"
-        size="lg"
-        name="ds"
-        :options="options">
-    </b-form-checkbox-group>
+      v-bind:class="{active: isActive}"
+      buttons
+      id="brand"
+      size="lg"
+      name="ds"
+      :options="options"
+    ></b-form-checkbox-group>
 
     <!-- Search button -->
     <b-button id="search">Search</b-button>
 
     <!-- Login -->
     <a>Log Out</a>
-
   </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return{
-            options: [
-                {text: "$", value: "$"},
-                {text: "$$", value: "$$"},
-                {text: "$$$", value: "$$$"}
-            ]
-        }
-    }
-}
+  data() {
+    return {
+      options: [
+        { text: "$", value: "$" },
+        { text: "$$", value: "$$" },
+        { text: "$$$", value: "$$$" }
+      ]
+    };
+  }
+};
 </script>
 
 
 <style scoped>
-    div {
-        font-family: "Poppins";
-    }
+div {
+  font-family: "Poppins";
+}
 
-    #black {
-        position: fixed;
-        z-index: -50;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        transform: translateX(calc((100% - 100vw) / 2));
-        background-color: rgb(0, 0, 0, 0.5);
-    }
+#black {
+  position: fixed;
+  z-index: -50;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translateX(calc((100% - 100vw) / 2));
+  background-color: rgb(0, 0, 0, 0.5);
+}
 
-    #background-img {
-        position: fixed;
-        z-index: -100;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-        transform: translateX(calc((100% - 100vw) / 2));
-        filter: blur(7px);
-    }
+#background-img {
+  position: fixed;
+  z-index: -100;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translateX(calc((100% - 100vw) / 2));
+  filter: blur(7px);
+}
 
-    h3 {
-        color: white;
-        font-weight: 700;
-        font-size: 100%;
-        margin-bottom: 10%;
-    }
+h3 {
+  color: white;
+  font-weight: 700;
+  font-size: 100%;
+  margin-bottom: 10%;
+}
 
-    .form-control {
-        margin: 0 auto;
-    }
+.form-control {
+  margin: 0 auto;
+}
 
-    #city {
-        width: 100%;
-        margin: 0 auto;
-        margin-bottom: 10%;
-        background-color: transparent;
-        color: white;
-        text-align: center;
-        font-size: 500%;
-        height: auto;
-        font-weight: 800;
-        border: none;
-        box-shadow: none;
-        caret-color: #fd593f;
-    }
+#city {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10%;
+  background-color: transparent;
+  color: white;
+  text-align: center;
+  font-size: 500%;
+  height: auto;
+  font-weight: 800;
+  border: none;
+  box-shadow: none;
+  caret-color: #fd593f;
+}
 
-    #city::placeholder {
-        color: white;
-        opacity: 0.5;
-    }
+#city::placeholder {
+  color: white;
+  opacity: 0.5;
+}
 
-    #food {
-        width: 75%;
-        margin: 0 auto;
-        background-color: transparent;
-        color: white;
-        font-size: 200%;
-        height: auto;
-        border: none;
-        box-shadow: none;
-        caret-color: #fd593f;
-        border-bottom: white 3px dotted;
-        display: inline-block;
-    }
+#food {
+  width: 75%;
+  margin: 0 auto;
+  background-color: transparent;
+  color: white;
+  font-size: 200%;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  caret-color: #fd593f;
+  border-bottom: white 3px dotted;
+  display: inline-block;
+}
 
-    #food::placeholder {
-        color: white;
-        opacity: 0.5;
-    }
+#food::placeholder {
+  color: white;
+  opacity: 0.5;
+}
 
-    #cutlery {
-        display: inline;
-        width: 10%;
-    }
+#cutlery {
+  display: inline;
+  width: 10%;
+}
 
-    #price {
-        margin-top: 10%;
-    }
+#price {
+  margin-top: 10%;
+}
 
-    #brand {
-        width: 75%;
-    }
+#brand {
+  width: 75%;
+}
 
-    #search {
-        display: block;
-        background-color: #fd593f;
-        margin: 0 auto;
-        border: none;
-        margin-top: 10%;
-        margin-bottom: 5%;
-    }
+#search {
+  display: block;
+  background-color: #fd593f;
+  margin: 0 auto;
+  border: none;
+  margin-top: 10%;
+  margin-bottom: 5%;
+}
 
-    #search:hover {
-        opacity: .5;
-    }
+#search:hover {
+  opacity: 0.5;
+}
 
-    a:not([href]):not([tabindex]) {
-        color: white;
-        opacity: .5;
-        margin-top: 10%;
-        text-decoration: none;
-        font-size: 15px;
-    }
+a:not([href]):not([tabindex]) {
+  color: white;
+  opacity: 0.5;
+  margin-top: 10%;
+  text-decoration: none;
+  font-size: 15px;
+}
 
-     a:not([href]):not([tabindex]):focus, 
-     a:not([href]):not([tabindex]):hover {
-        opacity: 1;
-        color: white;
-    }
-
+a:not([href]):not([tabindex]):focus,
+a:not([href]):not([tabindex]):hover {
+  opacity: 1;
+  color: white;
+}
 </style>
 
 <style>
-    label.btn {
-        background-color: #fd593f;
-        border: none;
-        opacity: .5;
-    }
-    label.btn:hover,label.btn:active, label.btn:visited {
-        background-color: #fd593f !important;
-        opacity: 1;        
-    }
-    .btn-secondary:not(:disabled):not(.disabled).active {
-        background-color: #fd593f !important;
-        opacity: 1;  
-    }
+label.btn {
+  background-color: #fd593f;
+  border: none;
+  opacity: 0.5;
+}
+label.btn:hover,
+label.btn:active,
+label.btn:visited {
+  background-color: #fd593f !important;
+  opacity: 1;
+}
+.btn-secondary:not(:disabled):not(.disabled).active {
+  background-color: #fd593f !important;
+  opacity: 1;
+}
 </style>
-
