@@ -1,9 +1,6 @@
 <template>
 <div>
 
-    <!-- Overlay -->
-    
-
     <!-- Place Header -->
     <div id="info-pic-div">
         <img id="info-pic" :src="infoPic"/>
@@ -13,7 +10,7 @@
 
     <!-- Rating -->
     <div id="rating">
-        <img :src="stars"/>
+        <img id="stars" :src="stars"/>
     </div>
 
     <!-- Reviews -->
@@ -90,12 +87,21 @@ export default {
 
     #rating {
         background-color: grey;
-        height: 100%;
+        height:10%;
+        position: absolute;
+        top: 50;
+        left: 0;
+        right: 0;
+        bottom: 0;
         /* margin-top: 72%;
         min-width: 100%;
         min-height: 25%;
         transform: translateX(calc((100% - 100vw) / 2));
         background-color:grey; */
+    }
+
+    #stars {
+        width: 15%;
     }
 
     #container {
@@ -112,6 +118,7 @@ export default {
         padding: 5%;
         margin: 10%;
     }
+
 
 
 </style>

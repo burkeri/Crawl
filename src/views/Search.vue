@@ -20,7 +20,7 @@
     <b-form-checkbox-group
         v-bind:class="{active: isActive}"
         buttons
-        class="btn btn-brand btn-lg"
+        id="brand"
         size="lg"
         name="ds"
         :options="options">
@@ -136,6 +136,10 @@ export default {
         margin-top: 10%;
     }
 
+    #brand {
+        width: 75%;
+    }
+
     #search {
         display: block;
         background-color: #fd593f;
@@ -164,3 +168,20 @@ export default {
     }
 
 </style>
+
+<style>
+    label.btn {
+        background-color: #fd593f;
+        border: none;
+        opacity: .5;
+    }
+    label.btn:hover,label.btn:active, label.btn:visited {
+        background-color: #fd593f !important;
+        opacity: 1;        
+    }
+    .btn-secondary:not(:disabled):not(.disabled).active {
+        background-color: #fd593f !important;
+        opacity: 1;  
+    }
+</style>
+
