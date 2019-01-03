@@ -9,15 +9,14 @@
     </div>
 
     <!-- Rating -->
-    <div id="rating">
-        <img id="stars" :src="stars"/>
-    </div>
+    <div id="rating-container"></div>
 
     <!-- Reviews -->
     <div id="container">
         <div id="reviews" v-for="item in items">
             <p>{{item.review}}</p>
         </div>
+        <b-button>Load more</b-button>
     </div>
 
 </div> 
@@ -36,8 +35,30 @@ export default {
                 {review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},            
                 {review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},            
                 {review: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}            
-            ]
+            ],
+            rating: 4.5,
+            test: "This is a test."
         }
+    },
+    methods: {
+        printRating: function() {
+
+           var iterator = (this.rating);
+
+           for (var i=0; i< iterator; i++){
+                var bucket = document.getElementById("rating-container");
+                var wrap = document.createElement("div");
+                var icon = document.createElement("img");
+                icon.setAttribute("src", this.stars);
+                icon.classList.add("rating-icon");
+                wrap.classList.add("rating-icon", "inline");
+                wrap.appendChild(icon);
+                bucket.appendChild(wrap);
+           }
+        }
+    },
+    mounted(){
+        this.printRating();
     }
 }
 </script>
@@ -85,30 +106,28 @@ export default {
         font-weight: 700;
     }
 
-    #rating {
-        background-color: grey;
+    #rating-container {
+        background-color: white;
         height:10%;
-        position: absolute;
-        top: 50;
+        width: 100%;
+        position: fixed;
+        top: 40%;
         left: 0;
-        right: 0;
-        bottom: 0;
-        /* margin-top: 72%;
-        min-width: 100%;
-        min-height: 25%;
-        transform: translateX(calc((100% - 100vw) / 2));
-        background-color:grey; */
+        padding: 2%;
+        display: inline;
     }
 
     #stars {
-        width: 15%;
+        position: absolute;
+        height: 100%;
+        margin: 0 auto;
     }
 
     #container {
         position: absolute;
-        overflow: scroll;
-        top: 100%;
-        background-color:aqua;
+        z-index: -200;
+        top: 50%;
+        background-color:white;
     }
 
     #reviews {
@@ -119,7 +138,34 @@ export default {
         margin: 10%;
     }
 
+    img {
+        display: inline;
+    }
 
+    .btn {
+        background-color: #fd593f;
+        border: none;
+        margin-bottom: 5%;
+    }
+
+    .btn:hover, .btn:visited {
+        background-color: #fd593f;
+        border: none;
+        opacity: .5;
+    }
+
+</style>
+
+<style>
+
+    .rating-icon {
+        height: 100%;
+        margin-right: 1%;
+    }
+
+    .inline {
+        display: inline;
+    }
 
 </style>
 
