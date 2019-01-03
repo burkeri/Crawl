@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- Background Image-->
     <div id="background-img">
       <img src="../assets/food-resize.jpg">
@@ -68,53 +67,51 @@ export default {
 </script>
 
 <style scoped>
+.error {
+  color: red;
+}
 
-  .error {
-    color: red;
-  }
+h1 {
+  font-family: "Poppins";
+  font-weight: 700;
+  font-size: 500%;
+  color: white;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
 
-  h1 {
-    font-family: "Poppins";
-    font-weight: 700;
-    font-size: 500%;
-    color: white;
-    margin-top: 5%;
-    margin-bottom: 10%;
-  }
+#background-img {
+  position: fixed;
+  z-index: -100;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translateX(calc((100% - 100vw) / 2));
+  filter: blur(7px);
+}
 
-  #background-img {
-    position: fixed;
-    z-index: -100;
-    right: 0;
-    bottom: 0;
-    min-width: 100%;
-    min-height: 100%;
-    transform: translateX(calc((100% - 100vw) / 2));
-    filter: blur(7px);
-  }
+.form-control {
+  width: 75%;
+  margin: 0 auto;
+  font-family: "Poppins";
+}
 
-  .form-control {
-    width: 75%;
-    margin: 0 auto;
-    font-family: "Poppins";
-  }
+#reg {
+  background-color: #fd593f;
+  border: none;
+  font-family: "Poppins";
+}
 
-  #reg {
-    background-color: #fd593f;
-    border: none;
-    font-family: "Poppins";
-  }
+#reg:hover {
+  opacity: 0.5;
+}
 
-  #reg:hover {
-    opacity: .5;
-  }
+#reg:focus {
+  outline: none;
+}
 
-  #reg:focus {
-    outline: none;
-  }
-
-  #out:focus {
-    outline: none;
-  }
-
+#out:focus {
+  outline: none;
+}
 </style>
