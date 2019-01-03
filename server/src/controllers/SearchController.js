@@ -1,16 +1,19 @@
 require("dotenv").config();
+
 const { Place } = require("../models");
 const { Tag } = require("../models");
 const yelp = require("yelp-fusion");
 const keys = require("../config/keys");
 const axios = require("axios");
 const geolib = require("geolib");
+
 const client = yelp.client(keys.yelp.key);
 
 module.exports = {
   async search(req, res) {
     try {
       const userPositionResponse = await axios.post(
+
         `https://www.googleapis.com/geolocation/v1/geolocate?key=${
           keys.google.key
         }`

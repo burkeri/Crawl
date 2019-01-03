@@ -1,6 +1,7 @@
 <template>
   <div id="map-wrapper">
     <input type="text" v-model="radius">
+    
     <button @click="getLocation">Check</button>
     <p>{{nextLocation}}</p>
     <p>{{msg}}</p>
@@ -16,9 +17,11 @@ import * as turf from "@turf/turf";
 export default {
   data() {
     return {
+
       radius: "10",
       nextLocation: "Default",
       msg: "Default message",
+
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
       routeObj: {
@@ -117,6 +120,7 @@ export default {
 
         style: "mapbox://styles/mapbox/streets-v9"
       });
+
     },
     getLocation: function() {
       let data = this.routeObj.places;
@@ -190,12 +194,14 @@ export default {
       } else {
         this.error = "Geolocation is not supported by this browser.";
       }
+
     }
   },
   mounted() {
     let map = this.map();
     let data = this.routeObj.places;
     let lineCoordinates = [];
+
     // let radius = this.radius;
     // let circle;
     // let stage = 0;
@@ -268,6 +274,7 @@ export default {
     // }
 
     // getLocation();
+
 
     let geoJsonLine = {
       id: "route",
