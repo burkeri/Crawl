@@ -175,27 +175,24 @@ module.exports = {
           ) {
             currentLocation = place.Place.dataValues;
 
-            currentLocationLatLng = {
-              latitude: currentLocation.latitude,
-              longitude: currentLocation.longitude
-            };
+            currentLocationLatLng = placeLocation;
             smallestDistance = distance;
           }
         }
-        placeCounter++;
 
-        closestLocations.push(currentLocation);
-        closestLocationsName.push(currentLocation.pid);
-        closestLocationsLatLng.push(currentLocationLatLng);
-        lastLocation = {
-          latitude: currentLocation.latitude,
-          longitude: currentLocation.longitude
-        };
-        smallestDistance = Infinity;
         if (
           placeCounter < 5 &&
-          closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
+          closestLocationsName.indexOf(currentLocation.pid) === -1
         ) {
+          closestLocationsLatLng.push(currentLocationLatLng);
+          lastLocation = {
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude
+          };
+          smallestDistance = Infinity;
+          placeCounter++;
+          closestLocations.push(currentLocation);
+          closestLocationsName.push(currentLocation.pid);
           buildArray();
         }
       };
