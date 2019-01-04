@@ -60,7 +60,7 @@ export default new Router({
       component: End
     },
     {
-      path: "/post-review",
+      path: "/post",
       name: "post",
       component: Review
     }
