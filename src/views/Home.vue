@@ -4,10 +4,10 @@
     <h1>Taste Tour</h1>
 
     <!-- Overlay -->
-    <div id="black"></div>
+    <!-- <div id="black"></div> -->
 
     <!-- Background Vid -->
-    <video id="background-vid" autoplay loop muted src="../assets/Untitled.webm"></video>
+    <video id="background-vid" autoplay loop muted src="../assets/another.mp4"></video>
 
     <!-- Buttons -->
     <b-button size="lg" id="login">
