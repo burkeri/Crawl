@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
+
       <router-link to="/">Home</router-link> |
       <router-link to="register">Register</router-link> |
       <router-link to="login">Log In</router-link> |
@@ -10,10 +11,31 @@
       <router-link to="post">Add Review</router-link> |
       <router-link to="end">End</router-link> |
 
+
     </div>
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  beforeMount() {
+    if (localStorage.getItem("info")) {
+      try {
+        let info = JSON.parse(localStorage.getItem("info"));
+        this.$store.dispatch("setInfo", info);
+      } catch (e) {
+        localStorage.removeItem("info");
+      }
+    }
+    if (
+      this.$store.state.info.isUserLoggedIn === true &&
+      this.$store.state.info.isCrawlActive === false
+    ) {
+      this.$router.push("search");
+    }
+  }
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Poppins");
