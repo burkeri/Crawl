@@ -13,7 +13,6 @@ module.exports = {
   async search(req, res) {
     try {
       const userPositionResponse = await axios.post(
-
         `https://www.googleapis.com/geolocation/v1/geolocate?key=${
           keys.google.key
         }`
@@ -132,7 +131,6 @@ module.exports = {
             console.log(e);
           });
       }
-
       if (yelp_data) {
         const dbData = await Tag.findAll({
           where: {
@@ -141,7 +139,10 @@ module.exports = {
           include: [
             {
               model: Place,
-              where: { city: location, price: price }
+              where: {
+                city: location,
+                price: price
+              }
             }
           ]
         });
