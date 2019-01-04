@@ -63,13 +63,22 @@ export default {
       ]
     };
   },
+  mounted() {
+    navigator.geolocation.getCurrentPosition(position => {
+      this.$store.dispatch("setUserPosition", {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude
+      });
+    });
+  },
   methods: {
     async search() {
       try {
         const search = await SearchService.search({
           location: this.city,
           query: this.food,
-          price: this.checkedPrice
+          price: this.checkedPrice,
+          userPosition: this.$store.state.info.userPosition
         });
         console.log(search);
 

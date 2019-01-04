@@ -12,15 +12,9 @@ const client = yelp.client(keys.yelp.key);
 module.exports = {
   async search(req, res) {
     try {
-      const userPositionResponse = await axios.post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=${
-          keys.google.key
-        }`
-      );
-
       const userPosition = {
-        latitude: parseFloat(userPositionResponse.data.location.lat),
-        longitude: parseFloat(userPositionResponse.data.location.lng)
+        latitude: parseFloat(req.body.userPosition.latitude),
+        longitude: parseFloat(req.body.userPosition.longitude)
       };
 
       const location = req.body.location;
