@@ -9,7 +9,7 @@
     </div>
 
     <!-- Search Form -->
-    <h3 v-bind:style="message">Pick Your City</h3>
+    <h3>Pick Your City</h3>
     <b-form-input id="city" type="text" name="city" autocomplete="off" placeholder="New York"/>
     <img id="cutlery" src="../assets/cutlery.png">
     <b-form-input
@@ -23,14 +23,13 @@
     <!-- Price Select -->
     <h3 id="price">Price</h3>
 
-    <b-form-checkbox-group
-      v-bind:class="{active: isActive}"
+    <b-form-radio-group
       buttons
       id="brand"
       size="lg"
       name="ds"
       :options="options"
-    ></b-form-checkbox-group>
+    ></b-form-radio-group>
 
     <!-- Search button -->
     <b-button id="search">Search</b-button>
@@ -45,9 +44,9 @@ export default {
   data() {
     return {
       options: [
-        { text: "$", value: "$" },
-        { text: "$$", value: "$$" },
-        { text: "$$$", value: "$$$" }
+        { text: "$", value: "1" },
+        { text: "$$", value: "2" },
+        { text: "$$$", value: "3" }
       ]
     };
   }

@@ -14,6 +14,10 @@
         <!-- Image -->
         <img id="cutlery" src="../assets/cutlery.png"/>
 
+        <!-- Buttons -->
+        <b-button size="lg">Back to Search</b-button>
+        <a>Log Out</a>
+
     </div>
 </template>
 
@@ -46,6 +50,7 @@
     }
 
     h1 {
+        font-size: 450%;
         font-weight: 700;
         color: white;
     }
@@ -69,6 +74,27 @@
         margin: 0 auto;
         margin-top: 10%;
         padding: 5%;
+    }
+
+    .btn {
+        display: block;
+        margin: 0 auto;
+        border: none;
+        margin-top: 15%;
+        margin-bottom: 15%;
+        background-color: #fb593f;
+    }
+
+    a:not([href]):not([tabindex]) {
+        color: white;
+        text-decoration: none;
+        opacity: .5;
+    }
+
+    a:not([href]):not([tabindex]):focus,
+    a:not([href]):not([tabindex]):hover {
+        opacity: 1;
+        color: white;
     }
 </style>
 
