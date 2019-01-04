@@ -19,7 +19,7 @@
     <br>
     <div class="error" v-html="error"/>
     <br>
-    <b-button size="lg" id="reg" v-if="!$store.state.isUserLoggedIn" @click="register">Register</b-button>
+    <b-button size="lg" id="reg" v-if="!$store.state.info.isUserLoggedIn" @click="register">Register</b-button>
     <b-button size="lg" id="out" v-else @click="logout">Log Out</b-button>
   </div>
 </template>
@@ -50,6 +50,7 @@ export default {
         this.email = "";
         this.password = "";
         this.username = "";
+        this.$router.push("search");
       } catch (error) {
         this.error = error.response.data.error;
       }

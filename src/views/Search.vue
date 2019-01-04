@@ -133,7 +133,7 @@ h3 {
 }
 
 #cutlery {
-  display: inline;
+  display: inline-block;
   width: 10%;
 }
 
