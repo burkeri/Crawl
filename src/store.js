@@ -10,7 +10,10 @@ export default new Vuex.Store({
       user: null,
       token: null,
       isUserLoggedIn: false,
-      isCrawlActive: false
+      isCrawlActive: false,
+      crawlInfo: null,
+      routeObj: null,
+      userPosition: null
     }
   },
   mutations: {
@@ -31,6 +34,11 @@ export default new Vuex.Store({
       state.info.user = user;
       const parsed = JSON.stringify(state.info);
       localStorage.setItem("info", parsed);
+    },
+    setUserPosition(state, userPosition) {
+      state.info.userPosition = userPosition;
+      const parsed = JSON.stringify(state.info);
+      localStorage.setItem("info", parsed);
     }
   },
   actions: {
@@ -42,6 +50,9 @@ export default new Vuex.Store({
     },
     setUser({ commit }, user) {
       commit("setUser", user);
+    },
+    setUserPosition({ commit }, userPosition) {
+      commit("setUserPosition", userPosition);
     }
   }
 });
