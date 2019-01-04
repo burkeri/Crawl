@@ -10,7 +10,14 @@
 
     <!-- Search Form -->
     <h3>Pick Your City</h3>
-    <b-form-input id="city" type="text" name="city" autocomplete="off" placeholder="New York"/>
+    <b-form-input
+      id="city"
+      type="text"
+      name="city"
+      autocomplete="off"
+      placeholder="New York"
+      v-model="city"
+    />
     <img id="cutlery" src="../assets/cutlery.png">
     <b-form-input
       id="food"
@@ -18,6 +25,7 @@
       name="food"
       autocomplete="off"
       placeholder="Pick Your Food"
+      v-model="food"
     />
 
     <!-- Price Select -->
@@ -29,10 +37,11 @@
       size="lg"
       name="ds"
       :options="options"
+      v-model="checkedPrice"
     ></b-form-radio-group>
 
     <!-- Search button -->
-    <b-button id="search">Search</b-button>
+    <b-button @click="search" id="search">Search</b-button>
 
     <!-- Login -->
     <a>Log Out</a>
@@ -40,15 +49,36 @@
 </template>
 
 <script>
+import SearchService from "../services/SearchService";
 export default {
   data() {
     return {
+      city: "",
+      food: "",
+      checkedPrice: "",
       options: [
         { text: "$", value: "1" },
         { text: "$$", value: "2" },
         { text: "$$$", value: "3" }
       ]
     };
+  },
+  methods: {
+    async search() {
+      try {
+        const search = await SearchService.search({
+          location: this.city,
+          query: this.food,
+          price: this.checkedPrice
+        });
+        console.log(search);
+
+        this.location = "";
+        this.food = "";
+      } catch (error) {
+        this.error = error.response.data.error;
+      }
+    }
   }
 };
 </script>
