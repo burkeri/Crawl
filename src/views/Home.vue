@@ -7,10 +7,10 @@
     <!-- <div id="black"></div> -->
 
     <!-- Background Vid -->
-    <video id="background-vid" autoplay loop muted src="../assets/another.mp4"></video>
+    <video id="background-vid" autoplay loop playsinline muted src="../assets/another.mp4"></video>
 
     <!-- Buttons -->
-    <b-button size="lg" id="login">
+    <b-button size="lg" id="login"> 
       <router-link to="login">Sign In</router-link>
     </b-button>
     <b-button size="lg" id="register">
