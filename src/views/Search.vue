@@ -9,7 +9,7 @@
     </div>
 
     <!-- Search Form -->
-    <h3 v-bind:style="message">Pick Your City</h3>
+    <h3>Pick Your City</h3>
     <b-form-input id="city" type="text" name="city" autocomplete="off" placeholder="New York"/>
     <img id="cutlery" src="../assets/cutlery.png">
     <b-form-input
