@@ -42,6 +42,9 @@ export default {
     methods: {
         printRating: function() {
 
+            // STAR HALVESS WILL NOT SHOW UP
+            // CANNOT FOLLOW PATH
+
            var iterator = (this.rating);
 
            for (var i=0; i< iterator; i++){
@@ -54,7 +57,7 @@ export default {
                 var rstar = document.createElement("img");
 
                 // set source for 1/2 stars
-                lstar.setAttribute("src", "../assets/left-star.png");
+                lstar.setAttribute("src", "/Users/richelleburke/Documents/UCF/UCF_Local/Group Projects/Project_2/Crawl/src/assets/left-star.png");
                 rstar.setAttribute("src", "../assets/right-star.png");
 
                 // add class to 1/2 stars and div

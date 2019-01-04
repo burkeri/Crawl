@@ -47,6 +47,9 @@ export default {
     methods: {
         showSpots: function() {
 
+            // TRYING TO GET PLACES TO APPEAR DYNAMICALLY
+            // HOW TO GET INFO INTO DYNAMIC P TAG
+
            for (var i=0; i< this.spots.length; i++){
                 var bucket = document.getElementById("container");
                 var para = document.createElement("p");
