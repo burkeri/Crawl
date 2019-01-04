@@ -16,7 +16,9 @@ import Info from "./views/Info";
 // On Route
 // Arrived
 // End
+import End from "./views/End";
 // Post Review
+import Review from "./views/Review";
 
 Vue.use(Router);
 
@@ -51,6 +53,16 @@ export default new Router({
       path: "/route",
       name: "route",
       component: Route
+    },
+    {
+      path: "/end",
+      name: "end",
+      component: End
+    },
+    {
+      path: "/post",
+      name: "post",
+      component: Review
     }
   ]
 });

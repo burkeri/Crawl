@@ -1,5 +1,6 @@
 <template>
   <div id="map-wrapper">
+
     <div id="map"></div>
   </div>
 </template>
@@ -12,6 +13,7 @@ import { setInterval } from "timers";
 export default {
   data() {
     return {
+
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
       routeObj: {
@@ -110,14 +112,17 @@ export default {
 
         style: "mapbox://styles/mapbox/streets-v9"
       });
+
     }
   },
   mounted() {
     let map = this.map();
     let data = this.routeObj.places;
     let lineCoordinates = [];
+
     let circle;
     let stage = 0;
+
 
     let nextLocationCounter = 0;
     let nextLocation;
@@ -183,6 +188,7 @@ export default {
     }
 
     getLocation();
+
 
     let geoJsonLine = {
       id: "route",

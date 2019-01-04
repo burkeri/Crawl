@@ -4,13 +4,13 @@
     <h1>Taste Tour</h1>
 
     <!-- Overlay -->
-    <div id="black"></div>
+    <!-- <div id="black"></div> -->
 
     <!-- Background Vid -->
-    <video id="background-vid" autoplay loop muted src="../assets/Untitled.webm"></video>
+    <video id="background-vid" autoplay loop playsinline muted src="../assets/another.mp4"></video>
 
     <!-- Buttons -->
-    <b-button size="lg" id="login">
+    <b-button size="lg" id="login"> 
       <router-link to="login">Sign In</router-link>
     </b-button>
     <b-button size="lg" id="register">

@@ -1,10 +1,12 @@
 require("dotenv").config();
+
 const { Place } = require("../models");
 const { Tag } = require("../models");
 const yelp = require("yelp-fusion");
 const keys = require("../config/keys");
 const axios = require("axios");
 const geolib = require("geolib");
+
 const client = yelp.client(keys.yelp.key);
 
 module.exports = {
@@ -129,7 +131,6 @@ module.exports = {
             console.log(e);
           });
       }
-
       if (yelp_data) {
         const dbData = await Tag.findAll({
           where: {
@@ -138,7 +139,10 @@ module.exports = {
           include: [
             {
               model: Place,
-              where: { city: location, price: price }
+              where: {
+                city: location,
+                price: price
+              }
             }
           ]
         });
@@ -153,8 +157,11 @@ module.exports = {
       let currentLocation;
       let placeCounter = 0;
       let lastLocation = userPosition;
+      // if (finalData.length >= 5) {
+
       buildArray = function() {
         let placeLocation = {};
+
         for (place of finalData) {
           placeLocation = {
             latitude: place.Place.dataValues.latitude,
@@ -167,6 +174,7 @@ module.exports = {
             closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
           ) {
             currentLocation = place.Place.dataValues;
+
             currentLocationLatLng = {
               latitude: currentLocation.latitude,
               longitude: currentLocation.longitude
@@ -175,6 +183,7 @@ module.exports = {
           }
         }
         placeCounter++;
+
         closestLocations.push(currentLocation);
         closestLocationsName.push(currentLocation.pid);
         closestLocationsLatLng.push(currentLocationLatLng);
@@ -183,7 +192,10 @@ module.exports = {
           longitude: currentLocation.longitude
         };
         smallestDistance = Infinity;
-        if (placeCounter < 5) {
+        if (
+          placeCounter < 5 &&
+          closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
+        ) {
           buildArray();
         }
       };
@@ -195,6 +207,9 @@ module.exports = {
         center: centerOfPoints,
         places: closestLocations
       });
+      // } else {
+      //   console.log("NOT ENOUGH BIG DATA");
+      // }
     } catch (err) {
       console.log(err);
     }
