@@ -82,43 +82,13 @@ module.exports = {
 
             await Place.bulkCreate(dataToPush);
 
-            let pushNewTags = async function() {
-              let yelp_counter = 0;
-              let category_counter = 0;
-              let tagsToPush = [];
-              for (business of yelp_data) {
-                await Tag.create({
-                  pid: business.id,
-                  tag: query
-                });
-                for (category of business.categories) {
-                  let data = await Tag.findAll({
-                    where: {
-                      pid: business.id,
-                      tag: category.alias
-                    }
-                  });
+            for (business of yelp_data) {
+              await Tag.create({
+                pid: business.id,
+                tag: query
+              });
+            }
 
-                  if (data == false) {
-                    tagsToPush.push({
-                      pid: business.id,
-                      tag: category.alias
-                    });
-                  }
-                  category_counter++;
-                  if (category_counter === business.categories.length) {
-                    category_counter = 0;
-                    yelp_counter++;
-                  }
-                }
-                if (yelp_counter === yelp_data.length) {
-                  return tagsToPush;
-                }
-              }
-            };
-            let tagsToPush = await pushNewTags();
-
-            await Tag.bulkCreate(tagsToPush);
             return yelp_data;
           })
           .catch(e => {
