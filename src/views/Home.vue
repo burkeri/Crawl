@@ -4,7 +4,7 @@
     <h1>Taste Tour</h1>
 
     <!-- Overlay -->
-    <div id="black"></div>
+    <!-- <div id="black"></div> -->
 
     <!-- Background Vid -->
     <video id="background-vid" autoplay loop muted src="../assets/another.mp4"></video>

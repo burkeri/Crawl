@@ -11,63 +11,11 @@
         <!-- Title -->
         <h1>End of Crawl</h1>
 
+        <!-- Image -->
         <img id="cutlery" src="../assets/cutlery.png"/>
-
-        <div id="container">
-            <p></p>
-        </div>
 
     </div>
 </template>
-
-<script>
-export default {
-    data(){
-        return {
-            marker: 1,
-            spots: [
-                {
-                    number: this.marker,
-                    name: "Lorem Ipsum",
-                    pic: "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                },
-                {
-                    number: this.marker,
-                    name: "Lorem Ipsum",
-                    pic: "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                },
-                {
-                    number: this.marker,
-                    name: "Lorem Ipsum",
-                    pic: "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
-                },
-            ] 
-        }
-    },
-    methods: {
-        showSpots: function() {
-
-            // TRYING TO GET PLACES TO APPEAR DYNAMICALLY
-            // HOW TO GET INFO INTO DYNAMIC P TAG
-
-           for (var i=0; i< this.spots.length; i++){
-                var bucket = document.getElementById("container");
-                var para = document.createElement("p");
-
-                para.appendChild(this.name);
-
-                bucket.appendChild(para);
-
-                this.marker++;
-           }
-
-        }
-    },
-    mounted() {
-        this.showSpots();
-    } 
-}
-</script>
 
 <style scoped>
 
@@ -108,15 +56,19 @@ export default {
     }
 
     #container {
-        position: fixed;
+        position: absolute;
         min-width: 100%;
-        min-height: 100%;
-        background-color: aqua;
+        min-height: 90%;
         overflow: scroll;
     }
 
     p {
         background-color: #fb593f;
+        color: white;
+        width: 75%;
+        margin: 0 auto;
+        margin-top: 10%;
+        padding: 5%;
     }
 </style>
 
