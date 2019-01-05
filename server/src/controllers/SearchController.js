@@ -41,7 +41,7 @@ module.exports = {
             location: location,
             price: price,
             sort_by: "rating",
-            limit: 20
+            limit: 50
           })
           .then(async function(response) {
             yelp_data = response.jsonBody.businesses.filter(
@@ -68,7 +68,8 @@ module.exports = {
                     rating: business.rating,
                     numberOfRatings: business.review_count,
                     longitude: business.coordinates.longitude,
-                    latitude: business.coordinates.latitude
+                    latitude: business.coordinates.latitude,
+                    image: business.image_url
                   });
                 }
                 counter++;
@@ -121,7 +122,6 @@ module.exports = {
       let currentLocation;
       let placeCounter = 0;
       let lastLocation = userPosition;
-      // if (finalData.length >= 5) {
 
       buildArray = function() {
         let placeLocation = {};
@@ -143,7 +143,6 @@ module.exports = {
             smallestDistance = distance;
           }
         }
-
         if (
           placeCounter < 5 &&
           closestLocationsName.indexOf(currentLocation.pid) === -1
@@ -168,9 +167,6 @@ module.exports = {
         center: centerOfPoints,
         places: closestLocations
       });
-      // } else {
-      //   console.log("NOT ENOUGH BIG DATA");
-      // }
     } catch (err) {
       console.log(err);
     }

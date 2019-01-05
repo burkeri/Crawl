@@ -75,8 +75,8 @@ export default {
     async search() {
       try {
         const search = await SearchService.search({
-          location: this.city,
-          query: this.food,
+          location: this.city.toLowerCase().trim(),
+          query: this.food.toLowerCase().trim(),
           price: this.checkedPrice,
           userPosition: this.$store.state.info.userPosition
         });
