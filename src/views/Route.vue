@@ -29,7 +29,99 @@ export default {
     return {
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
-      routeObj: this.$store.state.info.routeObj,
+      routeObj: {
+        center: {
+          latitude: "28.561501",
+          longitude: "-81.241322"
+        },
+        places: [
+          {
+            pid: "uhjtuSbP9XkJQq8nz--VpQ",
+            name: "Uncle Maddio's Pizza - Orlando",
+            address: "703 N Alafaya Trl",
+            image:
+              "https://s3-media2.fl.yelpcdn.com/bphoto/tzoZ1G3hK-VDwVPMjU39EA/o.jpg",
+            city: "Orlando",
+            region: "FL",
+            price: 1,
+            rating: "4.0",
+            numberOfRatings: 77,
+            longitude: -81.2061715,
+            latitude: 28.5546892,
+            searchedBefore: false,
+            createdAt: "2019-01-05T19:02:42.000Z",
+            updatedAt: "2019-01-05T19:02:42.000Z"
+          },
+          {
+            pid: "ULU1v4LqU5LbRNnMXbWykg",
+            name: "Blaze Fast-Fire'd Pizza",
+            address: "4100 N Alafaya Trl",
+            image:
+              "https://s3-media4.fl.yelpcdn.com/bphoto/eD9-FtElFijRNy5mORUglQ/o.jpg",
+            city: "Orlando",
+            region: "FL",
+            price: 1,
+            rating: "4.5",
+            numberOfRatings: 203,
+            longitude: -81.208357,
+            latitude: 28.599052,
+            searchedBefore: false,
+            createdAt: "2019-01-05T19:02:42.000Z",
+            updatedAt: "2019-01-05T19:02:42.000Z"
+          },
+          {
+            pid: "GFVxe4gtWZwlILWp1qPTLg",
+            name: "Lazy Moon Pizza",
+            address: "11551 University Blvd",
+            image:
+              "https://s3-media1.fl.yelpcdn.com/bphoto/NWJy_oDeHtYx3dvIepZYDA/o.jpg",
+            city: "Orlando",
+            region: "FL",
+            price: 1,
+            rating: "4.5",
+            numberOfRatings: 529,
+            longitude: -81.2194356507873,
+            latitude: 28.5981983592022,
+            searchedBefore: false,
+            createdAt: "2019-01-05T19:02:42.000Z",
+            updatedAt: "2019-01-05T19:02:42.000Z"
+          },
+          {
+            pid: "rMdbNLK_JD13_5UkWtNP4g",
+            name: "Muzzarella Pizza and Italian Kitchen",
+            address: "7780 Lake Underhill Rd",
+            image:
+              "https://s3-media1.fl.yelpcdn.com/bphoto/pAflCK_H4aSi7e96a8N8TQ/o.jpg",
+            city: "Orlando",
+            region: "FL",
+            price: 1,
+            rating: "4.5",
+            numberOfRatings: 66,
+            longitude: -81.28142,
+            latitude: 28.53873,
+            searchedBefore: false,
+            createdAt: "2019-01-05T19:02:42.000Z",
+            updatedAt: "2019-01-05T19:02:42.000Z"
+          },
+          {
+            pid: "BERHdYECP9p1axoc3QXcBQ",
+            name: "Mario's Pizza",
+            address: "7213 Curryford Rd",
+            image:
+              "https://s3-media4.fl.yelpcdn.com/bphoto/58-Zyxoo2B7BJf9ShbY0lQ/o.jpg",
+            city: "Orlando",
+            region: "FL",
+            price: 1,
+            rating: "4.0",
+            numberOfRatings: 106,
+            longitude: -81.29118,
+            latitude: 28.51681,
+            searchedBefore: false,
+            createdAt: "2019-01-05T19:02:42.000Z",
+            updatedAt: "2019-01-05T19:02:42.000Z"
+          }
+        ]
+      },
 
       crawlInfo: this.$store.state.info.crawlInfo
     };
