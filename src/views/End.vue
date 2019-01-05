@@ -16,7 +16,7 @@
 
         <!-- Buttons -->
         <b-button size="lg">Back to Search</b-button>
-        <a>Log Out</a>
+        <router-link to="/" id="out">Log Out</router-link>
 
     </div>
 </template>

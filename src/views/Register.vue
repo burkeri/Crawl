@@ -19,7 +19,9 @@
     <br>
     <div class="error" v-html="error"/>
     <br>
-    <b-button size="lg" id="reg" v-if="!$store.state.isUserLoggedIn" @click="register">Register</b-button>
+    <b-button size="lg" id="reg" v-if="!$store.state.isUserLoggedIn" @click="register">
+      <router-link id="linking" to="search">Register</router-link>
+    </b-button>
     <b-button size="lg" id="out" v-else @click="logout">Log Out</b-button>
   </div>
 </template>
