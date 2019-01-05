@@ -29,6 +29,11 @@ export default {
       this.$store.state.info.isCrawlActive === false
     ) {
       this.$router.push("search");
+    } else if (
+      this.$store.state.info.isUserLoggedIn === true &&
+      this.$store.state.info.isCrawlActive === true
+    ) {
+      this.$router.push("route");
     }
   }
 };

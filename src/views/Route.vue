@@ -1,6 +1,5 @@
 <template>
   <div id="map-wrapper">
-
     <div id="map"></div>
   </div>
 </template>
@@ -8,97 +7,14 @@
 <script>
 import mapboxgl from "mapbox-gl";
 import * as turf from "@turf/turf";
-import { setInterval } from "timers";
 
 export default {
   data() {
     return {
-
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
-      routeObj: {
-        center: {
-          latitude: "28.542484",
-          longitude: "-81.326371"
-        },
-        places: [
-          {
-            pid: "BERHdYECP9p1axoc3QXcBQ",
-            name: "Mario's Pizza",
-            address: "7213 Curryford Rd",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.0",
-            numberOfRatings: 106,
-            longitude: -81.29118,
-            latitude: 28.51681,
-            searchedBefore: false,
-            createdAt: "2019-01-03T04:18:08.000Z",
-            updatedAt: "2019-01-03T04:18:08.000Z"
-          },
-          {
-            pid: "rMdbNLK_JD13_5UkWtNP4g",
-            name: "Muzzarella Pizza and Italian Kitchen",
-            address: "7780 Lake Underhill Rd",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 64,
-            longitude: -81.28142,
-            latitude: 28.53873,
-            searchedBefore: false,
-            createdAt: "2019-01-03T04:18:08.000Z",
-            updatedAt: "2019-01-03T04:18:08.000Z"
-          },
-          {
-            pid: "snY6Hub4XL7sx9GwjWb2kg",
-            name: "Pizzeria Del-Dio",
-            address: "3210 E Colonial Dr",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 141,
-            longitude: -81.3434482134918,
-            latitude: 28.5520465549289,
-            searchedBefore: false,
-            createdAt: "2019-01-03T04:18:08.000Z",
-            updatedAt: "2019-01-03T04:18:08.000Z"
-          },
-          {
-            pid: "79OcxliIkgasAEjH2pS01g",
-            name: "Tomasino's Pizza",
-            address: "2612 E Colonial Dr",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 194,
-            longitude: -81.3498468,
-            latitude: 28.551336,
-            searchedBefore: false,
-            createdAt: "2019-01-03T04:18:08.000Z",
-            updatedAt: "2019-01-03T04:18:08.000Z"
-          },
-          {
-            pid: "iX7R_COA8V-TMZGXOVRAjQ",
-            name: "Lazy Moon Pizza",
-            address: "1011 E Colonial Dr",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 297,
-            longitude: -81.365976028836,
-            latitude: 28.5534745,
-            searchedBefore: false,
-            createdAt: "2019-01-03T04:18:08.000Z",
-            updatedAt: "2019-01-03T04:18:08.000Z"
-          }
-        ]
-      }
+      routeObj: this.$store.state.info.routeObj,
+      crawlInfo: this.$store.state.info.crawlInfo
     };
   },
   methods: {
@@ -112,34 +28,17 @@ export default {
 
         style: "mapbox://styles/mapbox/streets-v9"
       });
-
-    }
-  },
-  mounted() {
-    let map = this.map();
-    let data = this.routeObj.places;
-    let lineCoordinates = [];
-
-    let circle;
-    let stage = 0;
-
-
-    let nextLocationCounter = 0;
-    let nextLocation;
-    nextLocation = data[nextLocationCounter];
-
-    for (let place of data) {
-      lineCoordinates.push([place.longitude, place.latitude]);
-    }
-
-    function getLocation() {
+    },
+    getLocation: function() {
       if (navigator.geolocation) {
-        navigator.geolocation.watchPosition(success, error);
+        navigator.geolocation.watchPosition(this.receivedPos, this.error);
       } else {
         this.error = "Geolocation is not supported by this browser.";
       }
-    }
-    function success(position) {
+    },
+    receivedPos: function(position) {
+      let data = this.routeObj.places;
+      let nextLocation = data[this.crawlInfo.nextLocationCounter];
       let crd = position.coords;
       let crdLngLat = turf.point([crd.longitude, crd.latitude]);
       let nextLocationLngLat = turf.point([
@@ -152,25 +51,31 @@ export default {
       };
 
       // console.log(radius);
-      circle = turf.circle(nextLocationLngLat, radius, circleOptions);
+      const circle = turf.circle(nextLocationLngLat, radius, circleOptions);
 
       if (turf.booleanPointInPolygon(crdLngLat, circle)) {
-        if (stage === 0) {
+        if (this.crawlInfo.visitStage === 0) {
           console.log(`You've made it!`);
-          stage = 1;
+          this.crawlInfo.visitStage = 1;
+          this.$store.dispatch("setCrawlInfo", this.crawlInfo);
         }
       } else {
-        if (stage === 1) {
+        if (this.crawlInfo.visitStage === 1) {
           console.log(`You left`);
-          stage = 0;
-          nextLocationCounter++;
+          this.crawlInfo.visitStage = 0;
+          this.crawlInfo.nextLocationCounter++;
+          if (
+            this.crawlInfo.nextLocationCounter === this.routeObj.places.length
+          ) {
+            this.$router.push("end");
+          }
+          this.$store.dispatch("setCrawlInfo", this.crawlInfo);
         } else {
           console.log("You are not there yet");
         }
       }
-    }
-
-    function error(error) {
+    },
+    posError: function(error) {
       switch (error.code) {
         case error.PERMISSION_DENIED:
           this.error = "User denied the request for Geolocation.";
@@ -186,9 +91,21 @@ export default {
           break;
       }
     }
+  },
+  mounted() {
+    let map = this.map();
+    let lineCoordinates = [];
+    let data = this.routeObj.places;
 
-    getLocation();
+    for (let place of data) {
+      lineCoordinates.push([place.longitude, place.latitude]);
+    }
 
+    // function getLocation() {}
+    // function success(position) {}
+    // function error(error) {}
+
+    this.getLocation();
 
     let geoJsonLine = {
       id: "route",
