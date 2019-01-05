@@ -11,7 +11,10 @@ export default new Vuex.Store({
       token: null,
       isUserLoggedIn: false,
       isCrawlActive: false,
-      crawlInfo: null,
+      crawlInfo: {
+        nextLocationCounter: 0,
+        visitStage: 0
+      },
       routeObj: null,
       userPosition: null
     }
@@ -39,6 +42,28 @@ export default new Vuex.Store({
       state.info.userPosition = userPosition;
       const parsed = JSON.stringify(state.info);
       localStorage.setItem("info", parsed);
+    },
+    setRouteObj(state, routeObj) {
+      state.info.routeObj = routeObj;
+      if (routeObj) {
+        state.info.isCrawlActive = true;
+      } else {
+        state.info.isCrawlActive = false;
+      }
+      const parsed = JSON.stringify(state.info);
+      localStorage.setItem("info", parsed);
+    },
+    setCrawlInfo(state, crawlInfo) {
+      if (state.info.isCrawlActive === true) {
+        state.info.crawlInfo = crawlInfo;
+      } else {
+        state.info.crawlInfo = {
+          nextLocationCounter: 0,
+          visitStage: 0
+        };
+      }
+      const parsed = JSON.stringify(state.info);
+      localStorage.setItem("info", parsed);
     }
   },
   actions: {
@@ -53,6 +78,12 @@ export default new Vuex.Store({
     },
     setUserPosition({ commit }, userPosition) {
       commit("setUserPosition", userPosition);
+    },
+    setRouteObj({ commit }, routeObj) {
+      commit("setRouteObj", routeObj);
+    },
+    setCrawlInfo({ commit }, crawlInfo) {
+      commit("setCrawlInfo", crawlInfo);
     }
   }
 });

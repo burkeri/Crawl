@@ -80,10 +80,17 @@ export default {
           price: this.checkedPrice,
           userPosition: this.$store.state.info.userPosition
         });
-        console.log(search);
+        const routeObj = {
+          center: search.data.center,
+          places: search.data.places
+        };
+
+        this.$store.dispatch("setRouteObj", routeObj);
 
         this.location = "";
         this.food = "";
+
+        this.$router.push("route");
       } catch (error) {
         this.error = error.response.data.error;
       }

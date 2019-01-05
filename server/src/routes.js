@@ -10,7 +10,6 @@ module.exports = app => {
 
   app.post(
     "/login",
-    // AuthenticationControllerPolicy.login,
     AuthenticationController.login
   );
 
