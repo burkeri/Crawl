@@ -12,15 +12,9 @@ const client = yelp.client(keys.yelp.key);
 module.exports = {
   async search(req, res) {
     try {
-      const userPositionResponse = await axios.post(
-        `https://www.googleapis.com/geolocation/v1/geolocate?key=${
-          keys.google.key
-        }`
-      );
-
       const userPosition = {
-        latitude: parseFloat(userPositionResponse.data.location.lat),
-        longitude: parseFloat(userPositionResponse.data.location.lng)
+        latitude: parseFloat(req.body.userPosition.latitude),
+        longitude: parseFloat(req.body.userPosition.longitude)
       };
 
       const location = req.body.location;
@@ -88,43 +82,13 @@ module.exports = {
 
             await Place.bulkCreate(dataToPush);
 
-            let pushNewTags = async function() {
-              let yelp_counter = 0;
-              let category_counter = 0;
-              let tagsToPush = [];
-              for (business of yelp_data) {
-                await Tag.create({
-                  pid: business.id,
-                  tag: query
-                });
-                for (category of business.categories) {
-                  let data = await Tag.findAll({
-                    where: {
-                      pid: business.id,
-                      tag: category.alias
-                    }
-                  });
+            for (business of yelp_data) {
+              await Tag.create({
+                pid: business.id,
+                tag: query
+              });
+            }
 
-                  if (data == false) {
-                    tagsToPush.push({
-                      pid: business.id,
-                      tag: category.alias
-                    });
-                  }
-                  category_counter++;
-                  if (category_counter === business.categories.length) {
-                    category_counter = 0;
-                    yelp_counter++;
-                  }
-                }
-                if (yelp_counter === yelp_data.length) {
-                  return tagsToPush;
-                }
-              }
-            };
-            let tagsToPush = await pushNewTags();
-
-            await Tag.bulkCreate(tagsToPush);
             return yelp_data;
           })
           .catch(e => {
@@ -175,27 +139,24 @@ module.exports = {
           ) {
             currentLocation = place.Place.dataValues;
 
-            currentLocationLatLng = {
-              latitude: currentLocation.latitude,
-              longitude: currentLocation.longitude
-            };
+            currentLocationLatLng = placeLocation;
             smallestDistance = distance;
           }
         }
-        placeCounter++;
 
-        closestLocations.push(currentLocation);
-        closestLocationsName.push(currentLocation.pid);
-        closestLocationsLatLng.push(currentLocationLatLng);
-        lastLocation = {
-          latitude: currentLocation.latitude,
-          longitude: currentLocation.longitude
-        };
-        smallestDistance = Infinity;
         if (
           placeCounter < 5 &&
-          closestLocationsName.indexOf(place.Place.dataValues.pid) === -1
+          closestLocationsName.indexOf(currentLocation.pid) === -1
         ) {
+          closestLocationsLatLng.push(currentLocationLatLng);
+          lastLocation = {
+            latitude: currentLocation.latitude,
+            longitude: currentLocation.longitude
+          };
+          smallestDistance = Infinity;
+          placeCounter++;
+          closestLocations.push(currentLocation);
+          closestLocationsName.push(currentLocation.pid);
           buildArray();
         }
       };

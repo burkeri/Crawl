@@ -10,11 +10,35 @@
       <router-link to="route">Route</router-link> |
       <router-link to="post">Add Review</router-link> |
       <router-link to="end">End</router-link> | -->
-
     </div>
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  beforeMount() {
+    if (localStorage.getItem("info")) {
+      try {
+        let info = JSON.parse(localStorage.getItem("info"));
+        this.$store.dispatch("setInfo", info);
+      } catch (e) {
+        localStorage.removeItem("info");
+      }
+    }
+    if (
+      this.$store.state.info.isUserLoggedIn === true &&
+      this.$store.state.info.isCrawlActive === false
+    ) {
+      this.$router.push("search");
+    } else if (
+      this.$store.state.info.isUserLoggedIn === true &&
+      this.$store.state.info.isCrawlActive === true
+    ) {
+      this.$router.push("route");
+    }
+  }
+};
+</script>
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Poppins");

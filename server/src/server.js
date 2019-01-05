@@ -14,7 +14,7 @@ app.use(serveStatic(`${__dirname}/../../dist`));
 
 require("./routes")(app);
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(config.port);
   console.log(`Server started of port ${config.port}`);
 });
