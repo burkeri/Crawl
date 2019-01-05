@@ -10,6 +10,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
 
+// Material
+
 Vue.config.productionTip = false;
 
 sync(store, router);

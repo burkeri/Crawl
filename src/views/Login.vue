@@ -15,7 +15,10 @@
     <br>
     <div class="error" v-html="error"/>
     <br>
-    <b-button size="lg" id="log" v-if="!$store.state.info.isUserLoggedIn" @click="login">Log In</b-button>
+
+    <b-button size="lg" id="log" v-if="!$store.state.isUserLoggedIn" @click="login">
+      <router-link id="linking" to="search">Log In</router-link>
+    </b-button>
     <b-button id="out" v-else @click="logout">Log Out</b-button>
   </div>
 </template>

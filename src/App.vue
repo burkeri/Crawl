@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="register">Register</router-link>|
-      <router-link to="login">Log In</router-link>|
-      <router-link to="search">Search</router-link>|
-      <router-link to="info">Info</router-link>|
-      <router-link to="route">Route</router-link>|
-      <router-link to="post">Add Review</router-link>|
-      <router-link to="end">End</router-link>
+      <br>
+      <!-- <router-link to="/">Home</router-link> |
+      <router-link to="register">Register</router-link> |
+      <router-link to="login">Log In</router-link> |
+      <router-link to="search">Search</router-link> |
+      <router-link to="info">Info</router-link> |
+      <router-link to="route">Route</router-link> |
+      <router-link to="post">Add Review</router-link> |
+      <router-link to="end">End</router-link> | -->
     </div>
     <router-view/>
   </div>
@@ -60,5 +61,28 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#linking {
+  color: white;
+  text-decoration: none;
+}
+
+#linking:hover {
+  color: white;
+  text-decoration: none;
+  opacity: 0.5;
+}
+
+#out {
+  color: white;
+  text-decoration: none;
+  opacity: 0.5;
+}
+
+#out:hover {
+  color: white;
+  text-decoration: none;
+  opacity: 1;
 }
 </style>

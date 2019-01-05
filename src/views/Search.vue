@@ -41,10 +41,14 @@
     ></b-form-radio-group>
 
     <!-- Search button -->
-    <b-button @click="search" id="search">Search</b-button>
+    <router-link id="linking" to="route">
+      <b-button @click="search" id="search">
+        Search
+      </b-button>
+    </router-link>
 
     <!-- Login -->
-    <a>Log Out</a>
+    <router-link to="/" id="out">Log Out</router-link>
   </div>
 </template>
 
@@ -94,6 +98,10 @@ export default {
       } catch (error) {
         this.error = error.response.data.error;
       }
+    },
+    logout() {
+      this.$store.dispatch("setToken", null);
+      this.$store.dispatch("setUser", null);
     }
   }
 };
@@ -201,20 +209,6 @@ h3 {
 
 #search:hover {
   opacity: 0.5;
-}
-
-a:not([href]):not([tabindex]) {
-  color: white;
-  opacity: 0.5;
-  margin-top: 10%;
-  text-decoration: none;
-  font-size: 15px;
-}
-
-a:not([href]):not([tabindex]):focus,
-a:not([href]):not([tabindex]):hover {
-  opacity: 1;
-  color: white;
 }
 </style>
 

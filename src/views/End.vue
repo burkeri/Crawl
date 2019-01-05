@@ -10,13 +10,14 @@
 
     <!-- Title -->
     <h1>End of Crawl</h1>
-
+    
     <!-- Image -->
     <img id="cutlery" src="../assets/cutlery.png">
-
+    
     <!-- Buttons -->
     <b-button size="lg">Back to Search</b-button>
-    <a>Log Out</a>
+    <router-link to="/" id="out">Log Out</router-link>
+
   </div>
 </template>
 
