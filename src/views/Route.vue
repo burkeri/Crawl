@@ -1,19 +1,36 @@
 <template>
   <div id="map-wrapper">
     <div id="map"></div>
+    <tiny-slider :mouse-drag="true" :loop="false" items="2" gutter="20">
+      <!-- <div v-for="place in routeObj.places" :key="place.pid">
+        <img :src="place.image" alt>
+      </div>-->
+      <card
+        v-for="place in routeObj.places"
+        :number="routeObj.places.indexOf(place)"
+        :place="place"
+        :key="place.pid"
+      ></card>
+    </tiny-slider>
   </div>
 </template>
 
 <script>
 import mapboxgl from "mapbox-gl";
 import * as turf from "@turf/turf";
-
+import VueTinySlider from "vue-tiny-slider";
+import card from "@/components/card.vue";
 export default {
-  data() {
+  components: {
+    "tiny-slider": VueTinySlider,
+    card: card
+  },
+  data: function() {
     return {
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
       routeObj: this.$store.state.info.routeObj,
+
       crawlInfo: this.$store.state.info.crawlInfo
     };
   },
