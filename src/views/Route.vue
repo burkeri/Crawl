@@ -13,7 +13,7 @@
     <div id="map-wrapper">
       <div id="map"></div>
     </div>
-    <tiny-slider :mouse-drag="true" :loop="false" items="2" gutter="20">
+    <tiny-slider :mouse-drag="true" :loop="false" items="1">
       <!-- <div v-for="place in routeObj.places" :key="place.pid">
           <img :src="place.image" alt>
       </div>-->
@@ -334,6 +334,29 @@ div {
   text-align: left;
 }
 
+.marker {
+  color: white;
+  background-color: #fd593f;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  padding: 3px 0 0 8px;
+  font-size: 1rem;
+  transition: width 1s;
+  transition: height 1s;
+}
+
+.marker:hover {
+  cursor: pointer;
+}
+
+.marker:active {
+  width: 35px;
+  height: 35px;
+}
+</style>
+
+<style>
 .marker {
   color: white;
   background-color: #fd593f;

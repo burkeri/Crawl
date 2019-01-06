@@ -26,22 +26,41 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.tns-controls {
+  display: none;
+}
+
+.tns-ovh {
+  height: 100vh;
+  width: 75vw;
+  margin: 0 auto;
+  margin-top: 80%;
+}
+
+.tns-inner {
+  height: 100%;
+}
+
+#tns1 {
+  height: 35%;
+}
+
 .card-container {
-  width: 200px;
-  height: 200px;
+	height: 100%;
+  width: 75%;
+  background-color: rgba(253, 89, 63, .85);
+  border-radius: 30px;
+  border: solid transparent;
 }
 
 .card-image-container {
-  background-position: center;
+  height: 50%;
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 5%;
   background-size: cover;
-  width: 80%;
-  height: 80%;
-}
-
-.card-image {
-  width: 100px;
-  height: auto;
+  background-position: center;
 }
 </style>
 
