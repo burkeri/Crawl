@@ -4,9 +4,11 @@
       <img class="card-image">
     </div>
     <div class="card-information-container">
-      <span class="card-number">{{number + 1}}</span>
+      <div class="card-number">
+        <span>{{number + 1}}</span>
+      </div>
       <div class="card-info">
-        <div>{{place.name}}</div>
+        <div id="name">{{place.name}}</div>
         <div>{{place.rating}}</div>
         <div>{{place.price}}</div>
       </div>
@@ -32,10 +34,11 @@ export default {
 }
 
 .tns-ovh {
-  height: 100vh;
-  width: 75vw;
+  width: 65vw;
+  position: fixed;
+  bottom: 2%;
+  left: 18%;
   margin: 0 auto;
-  margin-top: 80%;
 }
 
 .tns-inner {
@@ -47,9 +50,9 @@ export default {
 }
 
 .card-container {
-	height: 100%;
-  width: 75%;
-  background-color: rgba(253, 89, 63, .85);
+	height: 250px;
+  width: 70%;
+  background-color: rgba(253, 89, 63, .80);
   border-radius: 30px;
   border: solid transparent;
 }
@@ -61,6 +64,30 @@ export default {
   margin-top: 5%;
   background-size: cover;
   background-position: center;
+}
+
+.card-information-container {
+  color: white;
+}
+
+.card-number {
+  float: left;
+  width: 25%;
+  text-align: center;
+  font-size: 80px;
+  padding-left: 9%;
+}
+
+.card-info{
+  float: right;
+  width: 75%;
+  text-align: left;
+  padding-left: 20px;
+  padding-top: 5px;
+}
+
+#name {
+  font-weight: 700;
 }
 </style>
 
