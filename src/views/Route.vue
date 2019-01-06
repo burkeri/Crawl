@@ -1,9 +1,21 @@
 <template>
-  <div id="map-wrapper">
-    <div id="map"></div>
-    <tiny-slider :mouse-drag="true" :loop="false" items="2" gutter="20">
+  <div>
+    <div id="back-button">
+      <router-link id="back" to="search">
+        <i class="material-icons">arrow_left</i>
+        Back
+      </router-link>
+    </div>
+    <b-button id="start">
+      <img id="cutlery" src="../assets/cutlery.png"/>
+      Start
+    </b-button>
+    <div id="map-wrapper">
+      <div id="map"></div>
+    </div>
+    <tiny-slider :mouse-drag="true" :loop="false" items="1">
       <!-- <div v-for="place in routeObj.places" :key="place.pid">
-        <img :src="place.image" alt>
+          <img :src="place.image" alt>
       </div>-->
       <card
         v-for="place in routeObj.places"
@@ -259,17 +271,92 @@ export default {
 };
 </script>
 
-<style>
-#map {
-  margin: 0 auto;
-  width: 500px;
-  height: 500px;
+<style scoped>
+div {
+  font-family: "Poppins";
 }
 
-#map-wrapper {
+#back-button {
   text-align: left;
 }
 
+#back {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 18px;
+  color:#fd593f;
+  opacity: 0.5;
+  text-decoration: none;
+  margin-left: 5%;
+}
+
+#back:hover {
+  opacity: 1;
+}
+
+.material-icons {
+  font-size: 27px;
+}
+
+#cutlery {
+  width: 10%;
+  margin-right: 5%;
+  display: inline;
+}
+
+#start {
+  background-color: #fd593f;
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 5%;
+  text-align: center;
+  border: none;
+  font-weight: 700;
+  font-size: 100%;
+  display: block;
+}
+
+#start:hover {
+  opacity: .5;
+}
+
+#map {
+  width: 100%; 
+  height: 100%;
+}
+
+#map-wrapper {
+  position: fixed; 
+  z-index: -100;
+  top: 0; 
+  height: 100vh; 
+  width: 100vw; 
+  text-align: left;
+}
+
+.marker {
+  color: white;
+  background-color: #fd593f;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  padding: 3px 0 0 8px;
+  font-size: 1rem;
+  transition: width 1s;
+  transition: height 1s;
+}
+
+.marker:hover {
+  cursor: pointer;
+}
+
+.marker:active {
+  width: 35px;
+  height: 35px;
+}
+</style>
+
+<style>
 .marker {
   color: white;
   background-color: #fd593f;
