@@ -10,7 +10,7 @@
       <div class="card-info">
         <div id="name">{{place.name}}</div>
         <div>{{place.rating}}</div>
-        <div>{{place.price}}</div>
+        <div id="price">{{place.price}}</div>
       </div>
     </div>
   </div>
@@ -24,7 +24,21 @@ export default {
   //     }
   //   },
   name: "card",
-  props: { place: Object, number: Number }
+  props: { place: Object, number: Number },
+  methods: {
+
+    dollarSigns: function() {
+      for (var i=1; i<=this.place.price; i++) {
+        var dollars = document.createElement("span");
+        dollars.textContent = "$";
+        var div = document.getElementById("price");
+        div.appendChild(dollars);
+      }
+    }
+  },
+  mounted() {
+    this.dollarSigns();
+  }
 };
 </script>
 
