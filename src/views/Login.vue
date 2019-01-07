@@ -9,9 +9,11 @@
     <h1>Sign In</h1>
 
     <!-- Login Form -->
-    <b-form-input type="email" name="email" placeholder="email" v-model="email"/>
+    <img id="cutlery" src="../assets/cutlery.png">
+    <b-form-input id="signin" type="email" name="email" placeholder="email" v-model="email"/>
     <br>
-    <b-form-input type="password" name="password" placeholder="password" v-model="password"/>
+    <img id="cutlery" src="../assets/cutlery.png">
+    <b-form-input id="signin" type="password" name="password" placeholder="password" v-model="password"/>
     <br>
     <div class="error" v-html="error"/>
     <br>
@@ -111,5 +113,31 @@ h1 {
 
 #out:focus {
   outline: none;
+}
+
+#cutlery {
+  display: inline-block;
+  width: 10%;
+}
+
+#signin {
+  width: 75%;
+  margin: 0 auto;
+  background-color: transparent;
+  color: white;
+  font-size: 120%;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  caret-color: #fd593f;
+  border-bottom: white 3px dotted;
+  display: inline-block;
+  margin-bottom: 15%;
+  margin-top: 10%;
+}
+
+#signin::placeholder {
+  color: white;
+  opacity: 0.5;
 }
 </style>
