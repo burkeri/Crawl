@@ -95,8 +95,8 @@ export default {
   float: left;
   width: 10%;
   text-align: center;
-  font-size: 100px;
-  padding-left: 10px;
+  font-size: 90px;
+  color: white;
 }
 
 .card-info {
@@ -110,14 +110,6 @@ export default {
 }
 
 .tns-item {
-  height: 25%;
-}
-
-.card-number {
-  float: left;
-  text-align: center;
-  font-size: 100px;
-  color: white;
-  padding-left: 10px;
+  height: 284%;
 }
 </style>
