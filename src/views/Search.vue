@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <!-- Overlay -->
     <div id="black"></div>
 
@@ -209,10 +210,6 @@ h3 {
   border: none;
   margin-top: 10%;
   margin-bottom: 5%;
-}
-
-#search:hover {
-  opacity: 0.5;
 }
 </style>
 
