@@ -24,7 +24,7 @@
     <br>
 
     <b-button size="lg" id="reg" v-if="!$store.state.isUserLoggedIn" @click="register">
-      <router-link id="linking" to="search">Register</router-link>
+      <router-link id="reg-btn" to="search">Register</router-link>
     </b-button>
     <b-button size="lg" id="out" v-else @click="logout">Log Out</b-button>
   </div>
@@ -110,10 +110,6 @@ h1 {
   font-family: "Poppins";
 }
 
-#reg:hover {
-  opacity: 0.5;
-}
-
 #reg:focus {
   outline: none;
 }
@@ -146,5 +142,10 @@ h1 {
 #register::placeholder {
   color: white;
   opacity: 0.5;
+}
+
+#reg-btn {
+  color: white;
+  text-decoration: none;
 }
 </style>

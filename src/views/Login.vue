@@ -19,7 +19,7 @@
     <br>
 
     <b-button size="lg" id="log" v-if="!$store.state.isUserLoggedIn" @click="login">
-      <router-link id="linking" to="search">Log In</router-link>
+      <router-link id="log-btn" to="search">Log In</router-link>
     </b-button>
     <b-button id="out" v-else @click="logout">Log Out</b-button>
   </div>
@@ -103,10 +103,6 @@ h1 {
   font-family: "Poppins";
 }
 
-#log:hover {
-  opacity: 0.5;
-}
-
 #log:focus {
   outline: none;
 }
@@ -139,5 +135,10 @@ h1 {
 #signin::placeholder {
   color: white;
   opacity: 0.5;
+}
+
+#log-btn {
+  color: white;
+  text-decoration: none;
 }
 </style>
