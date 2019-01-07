@@ -9,7 +9,12 @@
       </div>
       <div class="card-info">
         <div id="name">{{place.name}}</div>
-        <div>{{place.rating}}</div>
+        <star-rating
+          v-bind:rating="parseFloat(place.rating)"
+          v-bind:star-size="25"
+          v-bind:read-only="true"
+          active-color="#ffffff"
+        >></star-rating>
         <div id="price">{{place.price}}</div>
       </div>
     </div>
@@ -17,17 +22,17 @@
 </template>
 
 <script>
+import StarRating from "vue-star-rating";
 export default {
-  //   data() {
-  //     styleObject: {
-  //       backgroundImage: `url(${this.place.image})`;
-  //     }
-  //   },
+  data() {},
+  components: {
+    StarRating: StarRating
+  },
   name: "card",
   props: { place: Object, number: Number },
   methods: {
     dollarSigns: function() {
-      for (var i=1; i<=this.place.price; i++) {
+      for (var i = 1; i <= place.price; i++) {
         var dollars = document.createElement("span");
         dollars.textContent = "$";
         var div = document.getElementById("price");
@@ -63,9 +68,9 @@ export default {
 }
 
 .card-container {
-	height: 250px;
+  height: 250px;
   width: 70%;
-  background-color: rgba(253, 89, 63, .80);
+  background-color: rgba(253, 89, 63, 0.8);
   border-radius: 30px;
   border: solid transparent;
 }
@@ -91,7 +96,7 @@ export default {
   padding-left: 9%;
 }
 
-.card-info{
+.card-info {
   float: right;
   width: 75%;
   text-align: left;
