@@ -1,12 +1,12 @@
 <template>
   <div class="card-container">
-    <div class="card-number">
-      <span>{{number + 1}}</span>
-    </div>
     <div class="card-image-container" v-bind:style="{backgroundImage: `url(${place.image})`}">
       <img class="card-image">
     </div>
     <div class="card-information-container">
+      <div class="card-number">
+        <span>{{number + 1}}</span>
+      </div>
       <div class="card-info">
         <div id="name">{{place.name}}</div>
         <star-rating
@@ -32,7 +32,7 @@ export default {
   props: { place: Object, number: Number },
   methods: {
     dollarSigns: function() {
-      for (var i = 1; i <= this.place.price; i++) {
+      for (var i = 1; i <= place.price; i++) {
         var dollars = document.createElement("span");
         dollars.textContent = "$";
         var div = document.getElementById("price");
@@ -52,10 +52,10 @@ export default {
 }
 
 .tns-ovh {
-  width: 100vw;
-  height: 28.3%;
+  width: 65vw;
   position: fixed;
-  bottom: 0;
+  bottom: 2%;
+  left: 18%;
   margin: 0 auto;
 }
 
@@ -76,49 +76,36 @@ export default {
 }
 
 .card-image-container {
+  height: 50%;
+  width: 75%;
+  margin: 0 auto;
+  margin-top: 5%;
   background-size: cover;
-  float: left;
-  width: 40%;
-  height: 20vh;
-  margin: 10px 0px 10px 10px;
-  box-sizing: border-box;
+  background-position: center;
 }
 
 .card-information-container {
-  color: #fff;
-  float: left;
-  width: 40%;
-  box-sizing: border-box;
+  color: white;
 }
 
 .card-number {
   float: left;
-  width: 10%;
+  width: 25%;
   text-align: center;
-  font-size: 100px;
-  padding-left: 10px;
+  font-size: 80px;
+  padding-left: 9%;
 }
 
 .card-info {
-  width: 100;
+  float: right;
+  width: 75%;
   text-align: left;
   padding-left: 20px;
+  padding-top: 5px;
 }
 
 #name {
   font-weight: 700;
-}
-
-.tns-item {
-  height: 25%;
-}
-
-.card-number {
-  float: left;
-  text-align: center;
-  font-size: 100px;
-  color: white;
-  padding-left: 10px;
 }
 </style>
 
