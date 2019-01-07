@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div id="map-wrapper">
-      <div id="map"></div>
-    </div>
+    <div id="map"></div>
     <div id="start-route">
       <b-button id="start" v-on:click="startOnRoute">
         <img id="cutlery" src="../assets/cutlery.png">
@@ -335,6 +333,7 @@ export default {
   }
 };
 </script>
+
 <style>
 .modal-content {
   background-color: rgba(253, 89, 63, 0.75) !important;
@@ -407,6 +406,7 @@ div {
   font-size: 100%;
   display: block;
   position: fixed;
+  top: 0;
 }
 
 #start:hover {
@@ -419,12 +419,18 @@ div {
 }
 
 #map-wrapper {
+
   position: fixed;
   z-index: -100;
   top: 0;
   height: 100vh;
   width: 100vw;
   text-align: left;
+  display: none;
+}
+
+.mapboxgl-canvas {
+  position: relative;
 }
 
 h2 {
@@ -451,10 +457,6 @@ h1 {
   font-weight: 700;
   margin-top: 35%;
 }
-
-/* #start-route {
-  display: none;
-} */
 
 #on-route {
   display: none;

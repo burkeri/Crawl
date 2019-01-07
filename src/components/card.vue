@@ -93,10 +93,8 @@ export default {
 
 .card-number {
   float: left;
-  width: 10%;
   text-align: center;
-  font-size: 100px;
-  padding-left: 10px;
+  font-size: 90px;
 }
 
 .card-info {
