@@ -10,19 +10,22 @@
 
     <!-- Title -->
     <h1>End of Crawl</h1>
-    
+
     <!-- Image -->
     <img id="cutlery" src="../assets/cutlery.png">
-    
+
     <!-- Buttons -->
     <b-button size="lg">Back to Search</b-button>
-    <router-link to="/" id="out">Log Out</router-link>
-
+    <LogOut></LogOut>
   </div>
 </template>
 
 <script>
+import LogOut from "@/components/LogOut.vue";
 export default {
+  components: {
+    LogOut: LogOut
+  },
   beforeMount() {
     this.$store.dispatch("setRouteObj", null);
     this.$store.dispatch("setCrawlInfo", null);

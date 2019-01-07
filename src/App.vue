@@ -9,7 +9,7 @@
       <router-link to="info">Info</router-link> |
       <router-link to="route">Route</router-link> |
       <router-link to="post">Add Review</router-link> |
-      <router-link to="end">End</router-link> | -->
+      <router-link to="end">End</router-link> |-->
     </div>
     <router-view/>
   </div>
@@ -81,5 +81,6 @@ export default {
   color: white;
   text-decoration: none;
   opacity: 1;
+  cursor: pointer;
 }
 </style>
