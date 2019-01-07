@@ -1,29 +1,46 @@
 <template>
   <div>
-    <div id="back-button">
-      <router-link id="back" to="search">
-        <i class="material-icons">arrow_left</i>
-        Back
-      </router-link>
-    </div>
-    <b-button id="start">
-      <img id="cutlery" src="../assets/cutlery.png"/>
-      Start
-    </b-button>
     <div id="map-wrapper">
       <div id="map"></div>
     </div>
-    <tiny-slider :mouse-drag="true" :loop="false" items="1">
-      <!-- <div v-for="place in routeObj.places" :key="place.pid">
-          <img :src="place.image" alt>
-      </div>-->
-      <card
-        v-for="place in routeObj.places"
-        :number="routeObj.places.indexOf(place)"
-        :place="place"
-        :key="place.pid"
-      ></card>
-    </tiny-slider>
+    <div id="start-route">
+      <div id="back-button">
+        <router-link id="back" to="search">
+          <i class="material-icons">arrow_left</i>
+          Back
+        </router-link>
+      </div>
+      <b-button id="start" v-on:click="startOnRoute">
+        <img id="cutlery" src="../assets/cutlery.png">
+        Start
+      </b-button>
+      <tiny-slider :mouse-drag="true" :loop="false" items="1">
+        <!-- <div v-for="place in routeObj.places" :key="place.pid">
+            <img :src="place.image" alt>
+        </div>-->
+        <card
+          v-for="place in routeObj.places"
+          :number="routeObj.places.indexOf(place)"
+          :place="place"
+          :key="place.pid"
+        ></card>
+      </tiny-slider>
+    </div>
+    <div id="on-route">
+      <br>
+      <b-card id="end-card"></b-card>
+      <h2>
+        En Route
+        <img id="cutlery" src="../assets/cutlery2.png">
+        <router-link to="end">
+          <b-button id="end-route">End</b-button>
+        </router-link>
+      </h2>
+    </div>
+    <div id="arrived">
+      <h1>You've Arrived</h1>
+      <div id="blur"></div>
+    </div>
   </div>
 </template>
 
@@ -139,6 +156,12 @@ export default {
     };
   },
   methods: {
+    startOnRoute: function() {
+      var onRoute = document.getElementById("on-route");
+      var startRoute = document.getElementById("start-route");
+      startRoute.style.display = "none";
+      onRoute.style.display = "block";
+    },
     map: function() {
       mapboxgl.accessToken = this.accessToken; // optional
 
@@ -179,12 +202,20 @@ export default {
           console.log(`You've made it!`);
           this.crawlInfo.visitStage = 1;
           this.$store.dispatch("setCrawlInfo", this.crawlInfo);
+          var onRoute = document.getElementById("on-route");
+          onRoute.style.display = "none";
+          var arr = document.getElementById("arrived");
+          arr.style.display = "block";
         }
       } else {
         if (this.crawlInfo.visitStage === 1) {
           console.log(`You left`);
           this.crawlInfo.visitStage = 0;
           this.crawlInfo.nextLocationCounter++;
+          var onRoute = document.getElementById("on-route");
+          onRoute.style.display = "block";
+          var arr = document.getElementById("arrived");
+          arr.style.display = "none";
           if (
             this.crawlInfo.nextLocationCounter === this.routeObj.places.length
           ) {
@@ -284,7 +315,7 @@ div {
   display: inline-flex;
   vertical-align: middle;
   font-size: 18px;
-  color:#fd593f;
+  color: #fd593f;
   opacity: 0.5;
   text-decoration: none;
   margin-left: 5%;
@@ -317,42 +348,58 @@ div {
 }
 
 #start:hover {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 #map {
-  width: 100%; 
+  width: 100%;
   height: 100%;
 }
 
 #map-wrapper {
-  position: fixed; 
+  position: fixed;
   z-index: -100;
-  top: 0; 
-  height: 100vh; 
-  width: 100vw; 
+  top: 0;
+  height: 100vh;
+  width: 100vw;
   text-align: left;
 }
 
-.marker {
-  color: white;
+h2 {
+  font-weight: 700;
+  color: #fd593f;
+}
+
+#blur {
+  position: fixed;
+  z-index: -50;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translateX(calc((100% - 100vw) / 2));
+  filter:blur(10px);
   background-color: #fd593f;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  padding: 3px 0 0 8px;
-  font-size: 1rem;
-  transition: width 1s;
-  transition: height 1s;
+  opacity: .80;
 }
 
-.marker:hover {
-  cursor: pointer;
+h1 {
+  font-size: 500%;
+  color: white;
+  font-weight: 700;
+  margin-top: 35%;
 }
 
-.marker:active {
-  width: 35px;
-  height: 35px;
+/* #start-route {
+  display: none;
+} */
+
+#on-route {
+  display: none;
+}
+
+#arrived {
+  display: none;
 }
 </style>
 
@@ -376,5 +423,38 @@ div {
 .marker:active {
   width: 35px;
   height: 35px;
+}
+
+#end-route {
+  background-color: #fd593f;
+  border: none;
+  opacity: 1;
+}
+
+#end-route:hover {
+  background-color: #fd593f;
+  opacity: 0.5;
+}
+
+#end-card {
+  border: none;
+  position: fixed;
+  z-index: -10;
+  width: 100%;
+  filter: blur(10px);
+}
+
+#next-card {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 80px;
+  border: none;
+  background-color: rgba(253, 89, 63, 0.75);
+  color: white;
+}
+
+#cutlery2 {
+  width: 20%;
 }
 </style>
