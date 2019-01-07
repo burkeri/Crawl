@@ -69,5 +69,6 @@ export default {
   color: white;
   text-decoration: none;
   opacity: 1;
+  cursor: pointer;
 }
 </style>

@@ -9,7 +9,12 @@
     <div class="card-information-container">
       <div class="card-info">
         <div id="name">{{place.name}}</div>
-        <div>{{place.rating}}</div>
+        <star-rating
+          v-bind:rating="parseFloat(place.rating)"
+          v-bind:star-size="25"
+          v-bind:read-only="true"
+          active-color="#ffffff"
+        >></star-rating>
         <div id="price">{{place.price}}</div>
       </div>
     </div>
@@ -17,12 +22,12 @@
 </template>
 
 <script>
+import StarRating from "vue-star-rating";
 export default {
-  //   data() {
-  //     styleObject: {
-  //       backgroundImage: `url(${this.place.image})`;
-  //     }
-  //   },
+  data() {},
+  components: {
+    StarRating: StarRating
+  },
   name: "card",
   props: { place: Object, number: Number },
   methods: {

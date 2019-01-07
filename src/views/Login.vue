@@ -4,7 +4,12 @@
     <div id="background-img">
       <img src="../assets/food-resize.jpg">
     </div>
-
+    <div id="back-button">
+      <router-link id="back" to="search">
+        <i class="material-icons">arrow_left</i>
+        Back
+      </router-link>
+    </div>
     <!-- Title -->
     <h1>Sign In</h1>
 
@@ -13,7 +18,13 @@
     <b-form-input id="signin" type="email" name="email" placeholder="email" v-model="email"/>
     <br>
     <img id="cutlery" src="../assets/cutlery.png">
-    <b-form-input id="signin" type="password" name="password" placeholder="password" v-model="password"/>
+    <b-form-input
+      id="signin"
+      type="password"
+      name="password"
+      placeholder="password"
+      v-model="password"
+    />
     <br>
     <div class="error" v-html="error"/>
     <br>
@@ -21,13 +32,17 @@
     <b-button size="lg" id="log" v-if="!$store.state.isUserLoggedIn" @click="login">
       <router-link id="log-btn" to="search">Log In</router-link>
     </b-button>
-    <b-button id="out" v-else @click="logout">Log Out</b-button>
+    <LogOut v-else></LogOut>
   </div>
 </template>
 
 <script>
 import AuthenticationService from "../services/AuthenticationService";
+import LogOut from "@/components/LogOut.vue";
 export default {
+  components: {
+    LogOut: LogOut
+  },
   data() {
     return {
       email: "",
@@ -53,20 +68,30 @@ export default {
       } catch (error) {
         this.error = error.response.data.error;
       }
-    },
-
-    logout() {
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
-
-      this.email = "";
-      this.password = "";
     }
   }
 };
 </script>
 
 <style scoped>
+#back-button {
+  text-align: left;
+}
+
+#back {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 18px;
+  color: #fd593f;
+  opacity: 0.5;
+  text-decoration: none;
+  margin-left: 5%;
+}
+
+#back:hover {
+  opacity: 1;
+}
+
 .error {
   color: red;
 }

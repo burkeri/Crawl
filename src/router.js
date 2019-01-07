@@ -18,7 +18,6 @@ import Info from "./views/Info";
 // End
 import End from "./views/End";
 // Post Review
-import Review from "./views/Review";
 
 Vue.use(Router);
 
@@ -58,11 +57,6 @@ export default new Router({
       path: "/end",
       name: "end",
       component: End
-    },
-    {
-      path: "/post",
-      name: "post",
-      component: Review
     }
   ]
 });
