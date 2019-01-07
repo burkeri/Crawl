@@ -5,6 +5,12 @@
       <img src="../assets/food-resize.jpg">
     </div>
 
+    <div id="back-button">
+      <router-link id="back" to="search">
+        <i class="material-icons">arrow_left</i>
+        Back
+      </router-link>
+    </div>
     <!-- Title -->
     <h1>Sign Up</h1>
 
@@ -14,10 +20,22 @@
       <b-form-input id="register" type="email" name="email" placeholder="email" v-model="email"/>
       <br>
       <img id="cutlery" src="../assets/cutlery.png">
-      <b-form-input id="register" type="password" name="password" placeholder="password" v-model="password"/>
+      <b-form-input
+        id="register"
+        type="password"
+        name="password"
+        placeholder="password"
+        v-model="password"
+      />
       <br>
       <img id="cutlery" src="../assets/cutlery.png">
-      <b-form-input id="register" type="text" name="username" placeholder="username" v-model="username"/>
+      <b-form-input
+        id="register"
+        type="text"
+        name="username"
+        placeholder="username"
+        v-model="username"
+      />
     </form>
     <br>
     <div class="error" v-html="error"/>
@@ -26,13 +44,17 @@
     <b-button size="lg" id="reg" v-if="!$store.state.isUserLoggedIn" @click="register">
       <router-link id="linking" to="search">Register</router-link>
     </b-button>
-    <b-button size="lg" id="out" v-else @click="logout">Log Out</b-button>
+    <LogOut v-else></LogOut>
   </div>
 </template>
 
 <script>
 import AuthenticationService from "../services/AuthenticationService";
+import LogOut from "@/components/LogOut.vue";
 export default {
+  components: {
+    LogOut: LogOut
+  },
   data() {
     return {
       email: "",
@@ -60,20 +82,30 @@ export default {
       } catch (error) {
         this.error = error.response.data.error;
       }
-    },
-    logout() {
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
-
-      this.email = "";
-      this.password = "";
-      this.username = "";
     }
   }
 };
 </script>
 
 <style scoped>
+#back-button {
+  text-align: left;
+}
+
+#back {
+  display: inline-flex;
+  vertical-align: middle;
+  font-size: 18px;
+  color: #fd593f;
+  opacity: 0.5;
+  text-decoration: none;
+  margin-left: 5%;
+}
+
+#back:hover {
+  opacity: 1;
+}
+
 .error {
   color: red;
 }

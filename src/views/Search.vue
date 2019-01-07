@@ -42,19 +42,23 @@
 
     <!-- Search button -->
     <router-link id="linking" to="route">
-      <b-button @click="search" id="search">
-        Search
-      </b-button>
+      <b-button @click="search" id="search">Search</b-button>
     </router-link>
 
     <!-- Login -->
-    <router-link to="/" id="out">Log Out</router-link>
+    <LogOut></LogOut>
   </div>
 </template>
 
 <script>
 import SearchService from "../services/SearchService";
+import LogOut from "@/components/LogOut.vue";
+
 export default {
+  components: {
+    LogOut: LogOut
+  },
+
   data() {
     return {
       city: "",
@@ -74,6 +78,10 @@ export default {
         longitude: position.coords.longitude
       });
     });
+  },
+  beforeMount() {
+    this.$store.dispatch("setRouteObj", null);
+    this.$store.dispatch("setCrawlInfo", null);
   },
   methods: {
     async search() {
@@ -98,10 +106,6 @@ export default {
       } catch (error) {
         this.error = error.response.data.error;
       }
-    },
-    logout() {
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
     }
   }
 };

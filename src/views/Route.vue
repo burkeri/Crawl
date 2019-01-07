@@ -379,9 +379,9 @@ h2 {
   min-width: 100%;
   min-height: 100%;
   transform: translateX(calc((100% - 100vw) / 2));
-  filter:blur(10px);
+  filter: blur(10px);
   background-color: #fd593f;
-  opacity: .80;
+  opacity: 0.8;
 }
 
 h1 {
