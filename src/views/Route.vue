@@ -452,10 +452,6 @@ h1 {
   margin-top: 35%;
 }
 
-/* #start-route {
-  display: none;
-} */
-
 #on-route {
   display: none;
 }
