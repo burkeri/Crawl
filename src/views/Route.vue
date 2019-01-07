@@ -49,6 +49,7 @@ import mapboxgl from "mapbox-gl";
 import * as turf from "@turf/turf";
 import VueTinySlider from "vue-tiny-slider";
 import card from "@/components/card.vue";
+import starsRating from "@/components/starrating.vue";
 export default {
   components: {
     "tiny-slider": VueTinySlider,

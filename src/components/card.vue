@@ -26,7 +26,6 @@ export default {
   name: "card",
   props: { place: Object, number: Number },
   methods: {
-
     dollarSigns: function() {
       for (var i=1; i<=this.place.price; i++) {
         var dollars = document.createElement("span");
