@@ -97,6 +97,7 @@ export default {
   text-align: center;
   font-size: 90px;
   color: white;
+  margin-right: 10px;
 }
 
 .card-info {
