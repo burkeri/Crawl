@@ -10,7 +10,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.use(BootstrapVue);
 
-// Material
+// StarRating
+import StarRating from "vue-dynamic-star-rating";
+Vue.component("star-rating", StarRating);
 
 Vue.config.productionTip = false;
 
