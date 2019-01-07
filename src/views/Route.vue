@@ -27,6 +27,7 @@
       </tiny-slider>
     </div>
     <div id="on-route">
+      <b-button @click="show">Modal</b-button>
       <br>
       <b-card id="end-card"></b-card>
       <h2>
@@ -41,6 +42,33 @@
       <h1>You've Arrived</h1>
       <div id="blur"></div>
     </div>
+    <b-modal ref="reviewModal" hide-footer hide-header class="b-modal">
+      <div class="modal-content-container">
+        <h3>You've Arrived!</h3>
+        <div
+          class="modal-image-container"
+          v-bind:style="{backgroundImage: `url(${this.routeObj.places[this.nextLocationCounter].image})`}"
+        ></div>
+        <div>
+          <h4>{{this.routeObj.places[this.nextLocationCounter].name}}</h4>
+          <h4>{{this.routeObj.places[this.nextLocationCounter].address}}</h4>
+          <p>Leave a Rating?</p>
+
+          <star-rating
+            v-model="this.routeObj.places[this.nextLocationCounter].rating"
+            v-bind:star-size="50"
+            v-bind:increment="1"
+            v-bind:max-rating="5"
+            v-bind:show-rating="false"
+            active-color="#ffffff"
+          >></star-rating>
+
+          <br>
+          <b-button class="modal-submit">Submit</b-button>
+          <div>No Thanks...</div>
+        </div>
+      </div>
+    </b-modal>
   </div>
 </template>
 
@@ -49,16 +77,18 @@ import mapboxgl from "mapbox-gl";
 import * as turf from "@turf/turf";
 import VueTinySlider from "vue-tiny-slider";
 import card from "@/components/card.vue";
-import starsRating from "@/components/starrating.vue";
+import StarRating from "vue-star-rating";
 export default {
   components: {
     "tiny-slider": VueTinySlider,
+    StarRating: StarRating,
     card: card
   },
   data: function() {
     return {
       accessToken:
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
+      nextLocationCounter: this.$store.state.info.crawlInfo.nextLocationCounter,
       routeObj: {
         center: {
           latitude: "28.561501",
@@ -157,6 +187,9 @@ export default {
     };
   },
   methods: {
+    show: function() {
+      this.$refs.reviewModal.show();
+    },
     startOnRoute: function() {
       var onRoute = document.getElementById("on-route");
       var startRoute = document.getElementById("start-route");
@@ -302,10 +335,37 @@ export default {
   }
 };
 </script>
+<style>
+.modal-content {
+  background-color: rgba(253, 89, 63, 0.75) !important;
+}
+.vue-star-rating {
+  justify-content: center;
+}
+</style>
+
 
 <style scoped>
 div {
   font-family: "Poppins";
+}
+
+.modal-content-container {
+  color: white;
+}
+
+.modal-image-container {
+  width: 80%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto;
+}
+
+.modal-submit {
+  border: none;
+  background-color: white;
+  color: #fd593f;
 }
 
 #back-button {
@@ -379,9 +439,9 @@ h2 {
   min-width: 100%;
   min-height: 100%;
   transform: translateX(calc((100% - 100vw) / 2));
-  filter:blur(10px);
+  filter: blur(10px);
   background-color: #fd593f;
-  opacity: .80;
+  opacity: 0.8;
 }
 
 h1 {

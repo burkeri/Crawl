@@ -2,13 +2,29 @@
   <div>
     <div id="full"></div>
     <h1>Add Review</h1>
+    <star-rating
+      v-model="rating"
+      v-bind:star-size="25"
+      v-bind:increment="0.5"
+      v-bind:max-rating="5"
+    >></star-rating>
     <textarea class="form-control" rows="10"></textarea>
     <b-button>Submit</b-button>
   </div>
 </template>
 
 <script>
-export default {};
+import StarRating from "vue-star-rating";
+export default {
+  data() {
+    return {
+      rating: place.rating
+    };
+  },
+  components: {
+    StarRating
+  }
+};
 </script>
 
 <style scoped>
