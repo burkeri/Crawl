@@ -7,7 +7,7 @@
     <!-- <div id="black"></div> -->
 
     <!-- Background Vid -->
-    <video id="background-vid" autoplay loop playsinline muted src="../assets/vid-iphone.mp4"></video>
+    <video id="background-vid" autoplay loop muted webkit-playsinline playsinline src="../assets/vid-iphone.mp4"></video>
 
     <!-- Buttons -->
     <b-button size="lg" id="login"> 
