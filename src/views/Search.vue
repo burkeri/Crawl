@@ -153,7 +153,7 @@ h3 {
   background-color: transparent;
   color: white;
   text-align: center;
-  font-size: 500%;
+  font-size: 450%;
   height: auto;
   font-weight: 800;
   border: none;

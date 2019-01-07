@@ -327,7 +327,7 @@ div {
 }
 
 .material-icons {
-  font-size: 27px;
+  font-size: 40px;
 }
 
 #cutlery {
