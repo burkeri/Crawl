@@ -210,10 +210,6 @@ h3 {
   margin-top: 10%;
   margin-bottom: 5%;
 }
-
-#search:hover {
-  opacity: 0.5;
-}
 </style>
 
 <style>

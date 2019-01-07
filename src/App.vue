@@ -1,17 +1,5 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <br>
-      <!-- <router-link to="/">Home</router-link> |
-      <router-link to="register">Register</router-link> |
-      <router-link to="login">Log In</router-link> |
-      <router-link to="search">Search</router-link> |
-      <router-link to="info">Info</router-link> |
-      <router-link to="route">Route</router-link> |
-      <router-link to="post">Add Review</router-link> |
-      <router-link to="end">End</router-link> |-->
-    </div>
-    <router-view/>
   </div>
 </template>
 <script>
