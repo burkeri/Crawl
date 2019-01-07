@@ -72,10 +72,18 @@ a:hover {
   border: none;
 }
 
+#login:hover {
+  opacity: 0.5;
+}
+
 #register {
   background-color: #fd593f;
   border: none;
   opacity: 0.5;
+}
+
+#register:hover {
+  opacity: 1;
 }
 
 #login,
