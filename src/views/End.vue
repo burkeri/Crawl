@@ -15,9 +15,15 @@
     <img id="cutlery" src="../assets/cutlery.png">
 
     <!-- Buttons -->
-    <router-link to="search">
-      <b-button size="lg">Back to Search</b-button>
-    </router-link>
+
+    
+     <router-link to="search" id="to-search-txt">
+      <b-button size="lg" id="to-search">
+        Back to Search
+        </b-button>
+      </router-link>
+    
+
     <LogOut></LogOut>
   </div>
 </template>
@@ -99,15 +105,18 @@ p {
   background-color: #fb593f;
 }
 
-a:not([href]):not([tabindex]) {
+a {
   color: white;
   text-decoration: none;
-  opacity: 0.5;
 }
 
-a:not([href]):not([tabindex]):focus,
-a:not([href]):not([tabindex]):hover {
-  opacity: 1;
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+#to-search:hover {
+  background-color: #fd593f;
   color: white;
 }
 </style>

@@ -2,16 +2,16 @@
   <div>
     <Map></Map>
     <div id="start-route">
+      <b-button id="start" v-on:click="startOnRoute">
+        <img id="cutlery" src="../assets/cutlery.png">
+        Start
+      </b-button>
       <div id="back-button">
         <router-link id="back" to="search">
           <i class="material-icons">arrow_left</i>
           Back
         </router-link>
       </div>
-      <b-button id="start" v-on:click="startOnRoute">
-        <img id="cutlery" src="../assets/cutlery.png">
-        Start
-      </b-button>
       <tiny-slider :mouse-drag="true" :loop="false" items="1">
         <!-- <div v-for="place in routeObj.places" :key="place.pid">
             <img :src="place.image" alt>
@@ -182,6 +182,8 @@ div {
 
 #back-button {
   text-align: left;
+  position: fixed;
+  top: 10%;
 }
 
 #back {
@@ -210,14 +212,13 @@ div {
 
 #start {
   background-color: #fd593f;
-  width: 75%;
   margin: 0 auto;
-  margin-top: 5%;
   text-align: center;
   border: none;
   font-weight: 700;
   font-size: 100%;
   display: block;
+  position: fixed;
 }
 
 #start:hover {
@@ -248,10 +249,6 @@ h1 {
   font-weight: 700;
   margin-top: 35%;
 }
-
-/* #start-route {
-  display: none;
-} */
 
 #on-route {
   display: none;

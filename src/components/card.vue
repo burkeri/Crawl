@@ -1,12 +1,12 @@
 <template>
   <div class="card-container">
+    <div class="card-number">
+      <span>{{number + 1}}</span>
+    </div>
     <div class="card-image-container" v-bind:style="{backgroundImage: `url(${place.image})`}">
       <img class="card-image">
     </div>
     <div class="card-information-container">
-      <div class="card-number">
-        <span>{{number + 1}}</span>
-      </div>
       <div class="card-info">
         <div id="name">{{place.name}}</div>
         <star-rating
@@ -35,6 +35,7 @@ export default {
   name: "card",
   props: { place: Object, number: Number },
   methods: {
+
     dollarSigns: function(price) {
       switch (price) {
         case 1:
@@ -51,6 +52,7 @@ export default {
           break;
         default:
         // code block
+
       }
     }
   },
@@ -66,10 +68,10 @@ export default {
 }
 
 .tns-ovh {
-  width: 65vw;
+  width: 100vw;
+  height: 28.3%;
   position: fixed;
-  bottom: 2%;
-  left: 18%;
+  bottom: 0;
   margin: 0 auto;
 }
 
@@ -90,38 +92,41 @@ export default {
 }
 
 .card-image-container {
-  height: 50%;
-  width: 75%;
-  margin: 0 auto;
-  margin-top: 5%;
   background-size: cover;
-  background-position: center;
+  float: left;
+  width: 40%;
+  height: 20vh;
+  margin: 10px 0px 10px 10px;
+  box-sizing: border-box;
 }
 
 .card-information-container {
-  color: white;
+  color: #fff;
+  float: left;
+  width: 40%;
+  box-sizing: border-box;
 }
 
 .card-number {
   float: left;
-  width: 25%;
+  width: 10%;
   text-align: center;
-  font-size: 80px;
-  padding-left: 9%;
+  font-size: 90px;
+  color: white;
+  margin-right: 10px;
 }
 
 .card-info {
-  float: right;
-  width: 75%;
+  width: 100;
   text-align: left;
   padding-left: 20px;
-  padding-top: 5px;
 }
 
 #name {
   font-weight: 700;
 }
+
+.tns-item {
+  height: 284%;
+}
 </style>
-
-
-
