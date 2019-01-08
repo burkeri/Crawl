@@ -15,7 +15,9 @@
     <img id="cutlery" src="../assets/cutlery.png">
 
     <!-- Buttons -->
-    <b-button size="lg">Back to Search</b-button>
+    <router-link to="search">
+      <b-button size="lg">Back to Search</b-button>
+    </router-link>
     <LogOut></LogOut>
   </div>
 </template>

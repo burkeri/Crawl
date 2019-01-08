@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div id="map-wrapper">
-      <div id="map"></div>
-    </div>
+    <Map></Map>
     <div id="start-route">
       <div id="back-button">
         <router-link id="back" to="search">
@@ -27,7 +25,6 @@
       </tiny-slider>
     </div>
     <div id="on-route">
-      <b-button @click="show">Modal</b-button>
       <br>
       <b-card id="end-card"></b-card>
       <h2>
@@ -42,171 +39,57 @@
       <h1>You've Arrived</h1>
       <div id="blur"></div>
     </div>
-    <b-modal ref="reviewModal" hide-footer hide-header class="b-modal">
-      <div class="modal-content-container">
-        <h3>You've Arrived!</h3>
-        <div
-          class="modal-image-container"
-          v-bind:style="{backgroundImage: `url(${this.routeObj.places[this.nextLocationCounter].image})`}"
-        ></div>
-        <div>
-          <h4>{{this.routeObj.places[this.nextLocationCounter].name}}</h4>
-          <h4>{{this.routeObj.places[this.nextLocationCounter].address}}</h4>
-          <p>Leave a Rating?</p>
-
-          <star-rating
-            v-model="this.routeObj.places[this.nextLocationCounter].rating"
-            v-bind:star-size="50"
-            v-bind:increment="1"
-            v-bind:max-rating="5"
-            v-bind:show-rating="false"
-            active-color="#ffffff"
-          >></star-rating>
-
-          <br>
-          <b-button class="modal-submit">Submit</b-button>
-          <div>No Thanks...</div>
-        </div>
-      </div>
-    </b-modal>
+    <Modal :key="key"></Modal>
   </div>
 </template>
 
 <script>
-import mapboxgl from "mapbox-gl";
 import * as turf from "@turf/turf";
 import VueTinySlider from "vue-tiny-slider";
 import card from "@/components/card.vue";
-import StarRating from "vue-star-rating";
+import Modal from "@/components/Modal.vue";
+import Map from "@/components/Map.vue";
+import store from "@/store.js";
 export default {
   components: {
     "tiny-slider": VueTinySlider,
-    StarRating: StarRating,
-    card: card
+    card: card,
+    Modal: Modal,
+    Map: Map
+  },
+  mounted() {
+    this.$forceUpdate();
   },
   data: function() {
     return {
-      accessToken:
-        "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA",
       nextLocationCounter: this.$store.state.info.crawlInfo.nextLocationCounter,
-      routeObj: {
-        center: {
-          latitude: "28.561501",
-          longitude: "-81.241322"
-        },
-        places: [
-          {
-            pid: "uhjtuSbP9XkJQq8nz--VpQ",
-            name: "Uncle Maddio's Pizza - Orlando",
-            address: "703 N Alafaya Trl",
-            image:
-              "https://s3-media2.fl.yelpcdn.com/bphoto/tzoZ1G3hK-VDwVPMjU39EA/o.jpg",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.0",
-            numberOfRatings: 77,
-            longitude: -81.2061715,
-            latitude: 28.5546892,
-            searchedBefore: false,
-            createdAt: "2019-01-05T19:02:42.000Z",
-            updatedAt: "2019-01-05T19:02:42.000Z"
-          },
-          {
-            pid: "ULU1v4LqU5LbRNnMXbWykg",
-            name: "Blaze Fast-Fire'd Pizza",
-            address: "4100 N Alafaya Trl",
-            image:
-              "https://s3-media4.fl.yelpcdn.com/bphoto/eD9-FtElFijRNy5mORUglQ/o.jpg",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 203,
-            longitude: -81.208357,
-            latitude: 28.599052,
-            searchedBefore: false,
-            createdAt: "2019-01-05T19:02:42.000Z",
-            updatedAt: "2019-01-05T19:02:42.000Z"
-          },
-          {
-            pid: "GFVxe4gtWZwlILWp1qPTLg",
-            name: "Lazy Moon Pizza",
-            address: "11551 University Blvd",
-            image:
-              "https://s3-media1.fl.yelpcdn.com/bphoto/NWJy_oDeHtYx3dvIepZYDA/o.jpg",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 529,
-            longitude: -81.2194356507873,
-            latitude: 28.5981983592022,
-            searchedBefore: false,
-            createdAt: "2019-01-05T19:02:42.000Z",
-            updatedAt: "2019-01-05T19:02:42.000Z"
-          },
-          {
-            pid: "rMdbNLK_JD13_5UkWtNP4g",
-            name: "Muzzarella Pizza and Italian Kitchen",
-            address: "7780 Lake Underhill Rd",
-            image:
-              "https://s3-media1.fl.yelpcdn.com/bphoto/pAflCK_H4aSi7e96a8N8TQ/o.jpg",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.5",
-            numberOfRatings: 66,
-            longitude: -81.28142,
-            latitude: 28.53873,
-            searchedBefore: false,
-            createdAt: "2019-01-05T19:02:42.000Z",
-            updatedAt: "2019-01-05T19:02:42.000Z"
-          },
-          {
-            pid: "BERHdYECP9p1axoc3QXcBQ",
-            name: "Mario's Pizza",
-            address: "7213 Curryford Rd",
-            image:
-              "https://s3-media4.fl.yelpcdn.com/bphoto/58-Zyxoo2B7BJf9ShbY0lQ/o.jpg",
-            city: "Orlando",
-            region: "FL",
-            price: 1,
-            rating: "4.0",
-            numberOfRatings: 106,
-            longitude: -81.29118,
-            latitude: 28.51681,
-            searchedBefore: false,
-            createdAt: "2019-01-05T19:02:42.000Z",
-            updatedAt: "2019-01-05T19:02:42.000Z"
-          }
-        ]
-      },
+      key: 0,
+      // rating: 3,
+      info: store.state.info,
+      routeObj: store.state.info.routeObj,
 
-      crawlInfo: this.$store.state.info.crawlInfo
+      crawlInfo: store.state.info.crawlInfo
     };
   },
+  computed: {
+    storeInfo() {
+      return store.state.info;
+    }
+  },
+
   methods: {
     show: function() {
       this.$refs.reviewModal.show();
     },
+
     startOnRoute: function() {
       var onRoute = document.getElementById("on-route");
       var startRoute = document.getElementById("start-route");
       startRoute.style.display = "none";
       onRoute.style.display = "block";
+      this.getLocation();
     },
-    map: function() {
-      mapboxgl.accessToken = this.accessToken; // optional
 
-      return new mapboxgl.Map({
-        container: "map",
-        center: [this.routeObj.center.longitude, this.routeObj.center.latitude],
-        zoom: 11.5,
-
-        style: "mapbox://styles/mapbox/streets-v9"
-      });
-    },
     getLocation: function() {
       if (navigator.geolocation) {
         navigator.geolocation.watchPosition(this.receivedPos, this.error);
@@ -215,7 +98,7 @@ export default {
       }
     },
     receivedPos: function(position) {
-      let data = this.routeObj.places;
+      let data = this.info.routeObj.places;
       let nextLocation = data[this.crawlInfo.nextLocationCounter];
       let crd = position.coords;
       let crdLngLat = turf.point([crd.longitude, crd.latitude]);
@@ -236,28 +119,7 @@ export default {
           console.log(`You've made it!`);
           this.crawlInfo.visitStage = 1;
           this.$store.dispatch("setCrawlInfo", this.crawlInfo);
-          var onRoute = document.getElementById("on-route");
-          onRoute.style.display = "none";
-          var arr = document.getElementById("arrived");
-          arr.style.display = "block";
-        }
-      } else {
-        if (this.crawlInfo.visitStage === 1) {
-          console.log(`You left`);
-          this.crawlInfo.visitStage = 0;
-          this.crawlInfo.nextLocationCounter++;
-          var onRoute = document.getElementById("on-route");
-          onRoute.style.display = "block";
-          var arr = document.getElementById("arrived");
-          arr.style.display = "none";
-          if (
-            this.crawlInfo.nextLocationCounter === this.routeObj.places.length
-          ) {
-            this.$router.push("end");
-          }
-          this.$store.dispatch("setCrawlInfo", this.crawlInfo);
-        } else {
-          console.log("You are not there yet");
+          this.$refs.reviewModal.show();
         }
       }
     },
@@ -277,61 +139,6 @@ export default {
           break;
       }
     }
-  },
-  mounted() {
-    let map = this.map();
-    let lineCoordinates = [];
-    let data = this.routeObj.places;
-
-    for (let place of data) {
-      lineCoordinates.push([place.longitude, place.latitude]);
-    }
-
-    // function getLocation() {}
-    // function success(position) {}
-    // function error(error) {}
-
-    this.getLocation();
-
-    let geoJsonLine = {
-      id: "route",
-      type: "line",
-      source: {
-        type: "geojson",
-        data: {
-          type: "Feature",
-          properties: {},
-          geometry: {
-            type: "LineString",
-            coordinates: lineCoordinates
-          }
-        }
-      },
-      layout: {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      paint: {
-        "line-color": "#fd593f",
-        "line-width": 4,
-        "line-dasharray": [1, 2]
-      }
-    };
-
-    map.on("load", function() {
-      let markerNumber = 1;
-      for (let place of data) {
-        const el = document.createElement("div");
-        el.textContent = markerNumber;
-        el.className = "marker";
-
-        new mapboxgl.Marker(el)
-          .setLngLat([place.longitude, place.latitude])
-          .addTo(map);
-        markerNumber++;
-      }
-      map.addLayer(geoJsonLine);
-    });
   }
 };
 </script>
@@ -348,6 +155,11 @@ export default {
 <style scoped>
 div {
   font-family: "Poppins";
+}
+
+.no-thanks {
+  text-align: right;
+  font-size: 12px;
 }
 
 .modal-content-container {
@@ -387,7 +199,7 @@ div {
 }
 
 .material-icons {
-  font-size: 40px;
+  font-size: 27px;
 }
 
 #cutlery {
@@ -410,20 +222,6 @@ div {
 
 #start:hover {
   opacity: 0.5;
-}
-
-#map {
-  width: 100%;
-  height: 100%;
-}
-
-#map-wrapper {
-  position: fixed;
-  z-index: -100;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  text-align: left;
 }
 
 h2 {
