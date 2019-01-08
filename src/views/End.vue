@@ -15,11 +15,15 @@
     <img id="cutlery" src="../assets/cutlery.png">
 
     <!-- Buttons -->
-    <b-button size="lg" id="to-search">
-      <router-link to="search" id="to-search-txt">
+
+    
+     <router-link to="search" id="to-search-txt">
+      <b-button size="lg" id="to-search">
         Back to Search
+        </b-button>
       </router-link>
-    </b-button>
+    
+
     <LogOut></LogOut>
   </div>
 </template>

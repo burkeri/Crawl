@@ -60,7 +60,7 @@ export default {
     LogOut: LogOut
   },
 
-  data() {
+  data: function() {
     return {
       city: "",
       food: "",
@@ -98,12 +98,16 @@ export default {
           places: search.data.places
         };
 
-        this.$store.dispatch("setRouteObj", routeObj);
+        const savedToStore = await this.$store.dispatch(
+          "setRouteObj",
+          routeObj
+        );
 
         this.location = "";
         this.food = "";
-
-        this.$router.push("route");
+        if (savedToStore) {
+          this.$router.push("route");
+        }
       } catch (error) {
         this.error = error.response.data.error;
       }

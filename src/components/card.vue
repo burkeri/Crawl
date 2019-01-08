@@ -15,7 +15,7 @@
           v-bind:read-only="true"
           active-color="#ffffff"
         >></star-rating>
-        <div id="price">{{place.price}}</div>
+        <div id="price">{{this.price}}</div>
       </div>
     </div>
   </div>
@@ -24,24 +24,40 @@
 <script>
 import StarRating from "vue-star-rating";
 export default {
-  data() {},
+  data: function() {
+    return {
+      price: this.place.price
+    };
+  },
   components: {
     StarRating: StarRating
   },
   name: "card",
   props: { place: Object, number: Number },
   methods: {
-    dollarSigns: function() {
-      for (var i = 1; i <= this.place.price; i++) {
-        var dollars = document.createElement("span");
-        dollars.textContent = "$";
-        var div = document.getElementById("price");
-        div.appendChild(dollars);
+
+    dollarSigns: function(price) {
+      switch (price) {
+        case 1:
+          this.price = "$";
+
+          break;
+        case 2:
+          this.price = "$$";
+
+          break;
+        case 3:
+          this.price = "$$$";
+
+          break;
+        default:
+        // code block
+
       }
     }
   },
   mounted() {
-    this.dollarSigns();
+    this.dollarSigns(this.place.price);
   }
 };
 </script>
