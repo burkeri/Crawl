@@ -15,12 +15,9 @@ module.exports = {
       });
       const numberOfRatings = parseInt(dbData.dataValues.numberOfRatings);
       const oldRating = parseFloat(dbData.dataValues.rating);
-      console.log("User Review" + userReview);
-      console.log(oldRating);
       const newRating =
         (oldRating * numberOfRatings + userReview) / (numberOfRatings + 1);
 
-      console.log(newRating);
       dbData.update({
         numberOfRatings: numberOfRatings + 1,
         rating: newRating

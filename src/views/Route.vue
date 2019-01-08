@@ -13,9 +13,6 @@
         </router-link>
       </div>
       <tiny-slider :mouse-drag="true" :loop="false" items="1">
-        <!-- <div v-for="place in routeObj.places" :key="place.pid">
-            <img :src="place.image" alt>
-        </div>-->
         <card
           v-for="place in routeObj.places"
           :number="routeObj.places.indexOf(place)"
@@ -62,18 +59,12 @@ export default {
   },
   data: function() {
     return {
-      nextLocationCounter: this.$store.state.info.crawlInfo.nextLocationCounter,
-      key: 0,
-      // rating: 3,
-      info: store.state.info,
-      routeObj: store.state.info.routeObj,
-
-      crawlInfo: store.state.info.crawlInfo
+      key: 0
     };
   },
   computed: {
-    storeInfo() {
-      return store.state.info;
+    routeObj() {
+      return this.$store.state.info.routeObj;
     }
   },
 
@@ -111,12 +102,10 @@ export default {
         units: "miles"
       };
 
-      // console.log(radius);
       const circle = turf.circle(nextLocationLngLat, radius, circleOptions);
 
       if (turf.booleanPointInPolygon(crdLngLat, circle)) {
         if (this.crawlInfo.visitStage === 0) {
-          console.log(`You've made it!`);
           this.crawlInfo.visitStage = 1;
           this.$store.dispatch("setCrawlInfo", this.crawlInfo);
           this.$refs.reviewModal.show();

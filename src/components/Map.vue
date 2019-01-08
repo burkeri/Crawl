@@ -14,6 +14,11 @@ export default {
         "pk.eyJ1IjoidGhlbm9vZGxlbW9vc2UiLCJhIjoiY2pvdXM4c3ZrMWZnYTNrbW9ic2hmdjV6ZyJ9.-A735y9fU1TdsJ993uIKLA"
     };
   },
+  computed: {
+    routeObj() {
+      return this.$store.state.info.routeObj;
+    }
+  },
   methods: {
     map: function() {
       mapboxgl.accessToken = this.accessToken; // optional
@@ -26,27 +31,14 @@ export default {
       });
     }
   },
-  beforeMount() {
-    this.routeObj = this.$store.state.info.routeObj;
-  },
+  beforeMount() {},
   mounted() {
-    // this.routeObj = this.$store.state.info.routeObj;
-    // this.crawlInfo = this.$store.state.info.crawlInfo;
-    // console.log(this.$store.state.info);
-    // console.log(this.$store.state.info.routeObj);
-
     let map = this.map();
     let lineCoordinates = [];
     let data = this.routeObj.places;
     for (let place of data) {
       lineCoordinates.push([place.longitude, place.latitude]);
     }
-
-    // function getLocation() {}
-    // function success(position) {}
-    // function error(error) {}
-
-    // this.getLocation();
 
     let geoJsonLine = {
       id: "route",
