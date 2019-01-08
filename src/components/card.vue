@@ -13,6 +13,8 @@
           v-bind:rating="parseFloat(place.rating)"
           v-bind:star-size="25"
           v-bind:read-only="true"
+          v-bind:show-rating="false"
+          v-bind:increment="0.5"
           active-color="#ffffff"
         >></star-rating>
         <div id="price">{{this.price}}</div>
@@ -35,7 +37,6 @@ export default {
   name: "card",
   props: { place: Object, number: Number },
   methods: {
-
     dollarSigns: function(price) {
       switch (price) {
         case 1:
@@ -52,7 +53,6 @@ export default {
           break;
         default:
         // code block
-
       }
     }
   },

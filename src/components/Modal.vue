@@ -40,10 +40,16 @@ export default {
   },
   data: function() {
     return {
-      rating: 3,
-      crawlInfo: this.$store.state.info.crawlInfo,
-      routeObj: this.$store.state.info.routeObj
+      rating: 3
     };
+  },
+  computed: {
+    routeObj() {
+      return this.$store.state.info.routeObj;
+    },
+    crawlInfo() {
+      return this.$store.state.info.crawlInfo;
+    }
   },
   methods: {
     show: function() {
@@ -52,8 +58,8 @@ export default {
     async review() {
       try {
         const review = await ReviewService.review({
-          pid: this.$store.state.info.crawlInfo.pid,
-          rating: this.rating
+          pid: this.routeObj.places[this.crawlInfo.nextLocationCounter].pid,
+          userReview: this.rating
         });
         this.closeModal();
       } catch (error) {
@@ -62,7 +68,6 @@ export default {
     },
     closeModal() {
       this.$refs.reviewModal.hide();
-      console.log(`You left`);
       const newCrawlInfo = {
         nextLocationCounter: this.crawlInfo.nextLocationCounter + 1,
         visitStage: 0
@@ -74,10 +79,6 @@ export default {
         this.$router.push("end");
       }
     }
-  },
-  beforeMount() {
-    this.routeObj = this.$store.state.info.routeObj;
-    this.crawlInfo = this.$store.state.info.crawlInfo;
   }
 };
 </script>
